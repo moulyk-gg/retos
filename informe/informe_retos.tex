@@ -8,6 +8,7 @@
 \usepackage{lmodern}
 \usepackage{textcomp}
 \usepackage[spanish,es-noshorthands,es-tabla]{babel}
+\spanishplainpercent  % sin espacio fino antes de % (si no, se copiaría un espacio extra en los comandos)
 \usepackage[a4paper,top=2.3cm,bottom=2.3cm,left=2.2cm,right=2.2cm,headheight=14pt]{geometry}
 \usepackage{microtype}
 \usepackage[table]{xcolor}
@@ -55,7 +56,7 @@
 % Estilo terminal (comandos)
 \lstdefinestyle{terminal}{
   language=bash,
-  basicstyle=\ttfamily\small\color{termfg},
+  basicstyle=\ttfamily\footnotesize\color{termfg},
   alsoletter={-0123456789},
   keywordstyle=\color{kwc}\bfseries,
   keywordstyle=[2]\color{cmdc}\bfseries,
@@ -125,6 +126,7 @@
       left=6pt, top=2pt, bottom=2pt, fontupper=\footnotesize, before skip=2pt, after skip=8pt]
       \textbf{Captura pendiente} --- guardar la captura de este paso como \texttt{capturas/#1.png} y recompilar.
     \end{tcolorbox}}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 \newcommand{\bs}{\textbackslash\allowbreak{}}
 \newcommand{\hash}[1]{{\ttfamily\footnotesize\seqsplit{#1}}}
 
@@ -280,7 +282,8 @@ sudo apt update
 \texttt{DEBIAN\_FRONTEND=noninteractive} evita la pregunta interactiva de \texttt{tshark} sobre captura sin privilegios. \texttt{unrar} es el descompresor oficial de RAR (el \texttt{7zip} de Debian no trae soporte RAR).
 
 \begin{comando}{\textasciitilde{}/ctf}
-sudo DEBIAN_FRONTEND=noninteractive apt install -y 7zip unrar tshark xxd openssl binutils libscca-utils libesedb-utils python3-evtx python3-venv jq git curl qemu-user
+sudo DEBIAN_FRONTEND=noninteractive apt install -y 7zip unrar tshark xxd openssl \
+  binutils libscca-utils libesedb-utils python3-evtx python3-venv jq git curl qemu-user
 \end{comando}
 
 \subsubsection*{Paso 3. Crear un entorno virtual de Python}\label{paso:prep-03}
@@ -392,7 +395,7 @@ necesitamos descifrar con urgencia. ¿Nos ayudas a descifrarlo? La contraseña d
 \end{quote}
 
 \subsection{Ficheros analizados}
-\begin{longtable}{@{}p{0.30\linewidth}r p{0.50\linewidth}@{}}
+\begin{longtable}{@{}L{0.30\linewidth}r L{0.50\linewidth}@{}}
 \toprule \textbf{Fichero} & \textbf{Bytes} & \textbf{Descripción} \\ \midrule \endhead
 \texttt{evidencia.zip} & 41.844 & Zip cifrado (AES) del enunciado \\ \nopagebreak
 \multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 fc04df37aeca594a00cb1844c3bbb980\quad SHA1 d3b635adf720365ea53dcf42751c4e4eff509f05} \\ \nopagebreak
@@ -409,9 +412,9 @@ necesitamos descifrar con urgencia. ¿Nos ayudas a descifrarlo? La contraseña d
 \texttt{ccn\_cry} & 14.936 & Ransomware, ELF x86-64 \emph{stripped} \\ \nopagebreak
 \multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 e1e1d64b6d6349ed81fa4ee0913ef931\quad SHA1 c6828b737cf465aaa30b1a6059653c2f0224b25e} \\ \nopagebreak
 \multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily SHA256 28de3e9cf2d6fb6805080d7502f4936ccf2cccc88fe09241602faf5b28433127} \\ \midrule
-\texttt{Secret.txt} & 16 & Fichero descifrado \\ \nopagebreak
-\multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 0795c5f14c7756b857517e6c044ff36b\quad SHA1 03e2f061d9ddad69c2b541e79dae678889221bcd} \\ \nopagebreak
-\multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily SHA256 e8e4fc6987064df8fe3d37df9e30e3f6ab70a736c9d9b0eb65d3362f17bfdb8e} \\ \midrule
+\texttt{Secret.txt} & 20 & Fichero descifrado \\ \nopagebreak
+\multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 22c4d9e76544c9d7300da7c09752bea3\quad SHA1 ebec187d1d87907d30ec480fad170e513649a1e3} \\ \nopagebreak
+\multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily SHA256 d8f8edcbdcc3dd3f9bd7534bb18d613110e63387130a3082d1f711421fe25dbe} \\ \midrule
 \end{longtable}
 
 \subsection{Resumen del análisis}
@@ -432,12 +435,14 @@ necesitamos descifrar con urgencia. ¿Nos ayudas a descifrarlo? La contraseña d
 Se copian los ficheros del reto con su nombre original (sin el sufijo con el hash).
 
 \begin{comando}{\textasciitilde{}}
-mkdir -p ~/ctf/ccn-cry && cd ~/ctf/ccn-cry && cp ~/ctf/retos/'Reversing CCN-Cry'/evidencia-*.zip evidencia.zip && cp ~/ctf/retos/'Reversing CCN-Cry'/Secret-*.CCN_CRY Secret.txt.CCN_CRY && ls -l
+mkdir -p ~/ctf/ccn-cry && cd ~/ctf/ccn-cry && cp \
+  ~/ctf/retos/'Reversing CCN-Cry'/evidencia-*.zip evidencia.zip && cp \
+  ~/ctf/retos/'Reversing CCN-Cry'/Secret-*.CCN_CRY Secret.txt.CCN_CRY && ls -l
 \end{comando}
 \begin{salida}{Salida esperada}
 total 48
--rw-r--r-- 1 root root    24 Nov 12 05:54 Secret.txt.CCN_CRY
--rw-r--r-- 1 root root 41844 Nov 12 05:54 evidencia.zip
+-rw-r--r-- 1 root root    24 Nov 12 06:09 Secret.txt.CCN_CRY
+-rw-r--r-- 1 root root 41844 Nov 12 06:09 evidencia.zip
 \end{salida}
 \captura{ccn-01}{Preparar la carpeta del reto}
 
@@ -506,7 +511,8 @@ Compressed: 41844
 \subsubsection*{Paso 7. Resumen de la captura}\label{paso:ccn-07}
 \addcontentsline{toc}{subsubsection}{Paso 7. Resumen de la captura}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-capinfos incident-a1000032.pcapng | grep -E 'File type|Number of packets|File size|First packet|Last packet|Capture duration'
+capinfos incident-a1000032.pcapng | grep \
+  -E 'File type|Number of packets|File size|First packet|Last packet|Capture duration'
 \end{comando}
 \begin{salida}{Salida esperada}
 File type:           Wireshark/... - pcapng
@@ -560,7 +566,8 @@ Filter:<No Filter>
 \subsubsection*{Paso 10. Peticiones HTTP: descarga y "llamada a casa"}\label{paso:ccn-10}
 \addcontentsline{toc}{subsubsection}{Paso 10. Peticiones HTTP: descarga y "llamada a casa"}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-tshark -r incident-a1000032.pcapng -Y http.request -T fields -e frame.number -e ip.src -e ip.dst -e tcp.dstport -e http.host -e http.request.uri -e http.content_type
+tshark -r incident-a1000032.pcapng -Y http.request -T fields -e frame.number -e ip.src \
+  -e ip.dst -e tcp.dstport -e http.host -e http.request.uri -e http.content_type
 \end{comando}
 \begin{salida}{Salida esperada}
 4       192.168.1.41    192.168.1.37    80      192.168.1.37    /wget.tar.gz    
@@ -594,18 +601,20 @@ Content-type: gAu,UovL8;,B2fOT1xRZa?r3wpvD856r:B;?ShTiD:oat12
 \subsubsection*{Paso 12. Exportar los objetos HTTP de la captura}\label{paso:ccn-12}
 \addcontentsline{toc}{subsubsection}{Paso 12. Exportar los objetos HTTP de la captura}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-tshark -r incident-a1000032.pcapng --export-objects http,http_objs > /dev/null && ls -l http_objs
+tshark -r incident-a1000032.pcapng --export-objects http,http_objs > /dev/null && ls \
+  -l http_objs
 \end{comando}
 \begin{salida}{Salida esperada}
 total 8
--rw-r--r-- 1 root root 5811 Nov 12 05:54 wget.tar.gz
+-rw-r--r-- 1 root root 5811 Nov 12 06:09 wget.tar.gz
 \end{salida}
 \captura{ccn-12}{Exportar los objetos HTTP de la captura}
 
 \subsubsection*{Paso 13. Extraer el ransomware}\label{paso:ccn-13}
 \addcontentsline{toc}{subsubsection}{Paso 13. Extraer el ransomware}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-tar -tzvf http_objs/wget.tar.gz && tar -xzf http_objs/wget.tar.gz && file ccn_cry && md5sum ccn_cry
+tar -tzvf http_objs/wget.tar.gz && tar -xzf http_objs/wget.tar.gz && file ccn_cry && \
+  md5sum ccn_cry
 \end{comando}
 \begin{salida}{Salida esperada}
 -rwxr-xr-x root/root     14936 2019-01-09 17:03 ccn_cry
@@ -618,7 +627,8 @@ e1e1d64b6d6349ed81fa4ee0913ef931  ccn_cry
 \subsubsection*{Paso 14. Funciones importadas relevantes}\label{paso:ccn-14}
 \addcontentsline{toc}{subsubsection}{Paso 14. Funciones importadas relevantes}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-objdump -T ccn_cry | grep -E 'EVP_|srand|rand|time|gethostname|socket|connect|opendir|remove'
+objdump -T ccn_cry | grep \
+  -E 'EVP_|srand|rand|time|gethostname|socket|connect|opendir|remove'
 \end{comando}
 \begin{salida}{Salida esperada}
 0000000000000000      DF *UND*  0000000000000000 (OPENSSL_1_1_0) EVP_CipherInit_ex
@@ -660,7 +670,8 @@ abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#@$%&(){};'?!
 \subsubsection*{Paso 16. Generación de clave (32) e IV (8)}\label{paso:ccn-16}
 \addcontentsline{toc}{subsubsection}{Paso 16. Generación de clave (32) e IV (8)}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-objdump -d -M intel --no-show-raw-insn --start-address=0x1cdf --stop-address=0x1d4d ccn_cry | tail -n +7
+objdump -d -M intel --no-show-raw-insn --start-address=0x1cdf --stop-address=0x1d4d \
+  ccn_cry | tail -n +7
 \end{comando}
 \begin{salida}{Salida esperada}
 0000000000001cdf <.text+0xb1f>:
@@ -693,7 +704,8 @@ objdump -d -M intel --no-show-raw-insn --start-address=0x1cdf --stop-address=0x1
 \subsubsection*{Paso 17. Función generadora: charset[rand() \textbackslash{}\% 78]}\label{paso:ccn-17}
 \addcontentsline{toc}{subsubsection}{Paso 17. Función generadora: charset[rand() \textbackslash{}\% 78]}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-objdump -d -M intel --no-show-raw-insn --start-address=0x1a23 --stop-address=0x1a73 ccn_cry | tail -n +7
+objdump -d -M intel --no-show-raw-insn --start-address=0x1a23 --stop-address=0x1a73 \
+  ccn_cry | tail -n +7
 \end{comando}
 \begin{salida}{Salida esperada}
 0000000000001a23 <.text+0x863>:
@@ -730,7 +742,8 @@ objdump -d -M intel --no-show-raw-insn --start-address=0x1a23 --stop-address=0x1
 \subsubsection*{Paso 18. Construcción de la cabecera: separadores ':' y salto de línea}\label{paso:ccn-18}
 \addcontentsline{toc}{subsubsection}{Paso 18. Construcción de la cabecera: separadores ':' y salto de línea}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-objdump -d -M intel --no-show-raw-insn --start-address=0x16dc --stop-address=0x17b4 ccn_cry | grep -E 'call|WORD PTR \[rax\]'
+objdump -d -M intel --no-show-raw-insn --start-address=0x16dc --stop-address=0x17b4 \
+  ccn_cry | grep -E 'call|WORD PTR \[rax\]'
 \end{comando}
 \begin{salida}{Salida esperada}
     16f1:       call   10e0 <strcpy@plt>
@@ -746,7 +759,8 @@ objdump -d -M intel --no-show-raw-insn --start-address=0x16dc --stop-address=0x1
 \subsubsection*{Paso 19. La trampa: longitud de clave fijada a 16 bytes}\label{paso:ccn-19}
 \addcontentsline{toc}{subsubsection}{Paso 19. La trampa: longitud de clave fijada a 16 bytes}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-objdump -d -M intel --no-show-raw-insn --start-address=0x2064 --stop-address=0x20db ccn_cry | tail -n +7
+objdump -d -M intel --no-show-raw-insn --start-address=0x2064 --stop-address=0x20db \
+  ccn_cry | tail -n +7
 \end{comando}
 \begin{salida}{Salida esperada}
 0000000000002064 <.text+0xea4>:
@@ -783,7 +797,8 @@ objdump -d -M intel --no-show-raw-insn --start-address=0x2064 --stop-address=0x2
 \subsubsection*{Paso 20. Extraer clave e IV de la captura}\label{paso:ccn-20}
 \addcontentsline{toc}{subsubsection}{Paso 20. Extraer clave e IV de la captura}
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-CT=$(tshark -r incident-a1000032.pcapng -Y 'http.request.uri == "/user.php"' -T fields -e http.content_type)
+CT=$(tshark -r incident-a1000032.pcapng -Y 'http.request.uri == "/user.php"' -T fields \
+  -e http.content_type)
 KEY=$(printf %s "$CT" | cut -d: -f1 | cut -c1-16)
 IV=$(printf %s "$CT" | cut -d: -f2)
 echo "KEY=[$KEY]  IV=[$IV]"; printf %s "$KEY" | xxd -p; printf %s "$IV" | xxd -p
@@ -800,13 +815,12 @@ KEY=[gAu,UovL8;,B2fOT]  IV=[B;?ShTiD]
 Blowfish está en el \emph{provider legacy} de OpenSSL~3.
 
 \begin{comando}{\textasciitilde{}/ctf/ccn-cry}
-openssl enc -d -bf-cbc -provider legacy -provider default -K "$(printf %s "$KEY" | xxd -p)" -iv "$(printf %s "$IV" | xxd -p)" -in Secret.txt.CCN_CRY -out Secret.txt && cat Secret.txt; echo
+openssl enc -d -bf-cbc -provider legacy -provider default \
+  -K "$(printf %s "$KEY" | xxd -p)" -iv "$(printf %s "$IV" | xxd -p)" \
+  -in Secret.txt.CCN_CRY -out Secret.txt && cat Secret.txt; echo
 \end{comando}
 \begin{salida}{Salida esperada}
-hex string is too short, padding with zero bytes to length
-hex string is too short, padding with zero bytes to length
-bad decrypt
-40C775A0C67F0000:error:1C800064:Provider routines:ossl_cipher_unpadblock:bad decrypt:../providers/implementations/ciphers/ciphercommon_block.c:124:
+Flag: JosephPopp1989
 \end{salida}
 \captura{ccn-21}{Descifrar con Blowfish-CBC}
 
@@ -913,7 +927,7 @@ Herramientas & \texttt{xxd}, \texttt{objdump}, Python (\texttt{pefile}, \texttt{
 \begin{quote}\itshape Encuentra la flag. (Fichero: TheKraken.exe, MD5 33b0654d8e104031155c999e2f163bbd)\end{quote}
 
 \subsection{Ficheros analizados}
-\begin{longtable}{@{}p{0.30\linewidth}r p{0.50\linewidth}@{}}
+\begin{longtable}{@{}L{0.30\linewidth}r L{0.50\linewidth}@{}}
 \toprule \textbf{Fichero} & \textbf{Bytes} & \textbf{Descripción} \\ \midrule \endhead
 \texttt{TheKraken.exe} & 932 & PE x86 comprimido con Crinkler \\ \nopagebreak
 \multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 33b0654d8e104031155c999e2f163bbd\quad SHA1 426bad3e513925841a60aa7518e94397f7710564} \\ \nopagebreak
@@ -939,12 +953,14 @@ Herramientas & \texttt{xxd}, \texttt{objdump}, Python (\texttt{pefile}, \texttt{
 \subsubsection*{Paso 1. Preparar la carpeta y verificar el fichero}\label{paso:kraken-01}
 \addcontentsline{toc}{subsubsection}{Paso 1. Preparar la carpeta y verificar el fichero}
 \begin{comando}{\textasciitilde{}}
-mkdir -p ~/ctf/kraken && cd ~/ctf/kraken && cp ~/ctf/retos/'Reversing The Kraken'/TheKraken-*.exe TheKraken.exe && md5sum TheKraken.exe && file TheKraken.exe && ls -l TheKraken.exe
+mkdir -p ~/ctf/kraken && cd ~/ctf/kraken && cp \
+  ~/ctf/retos/'Reversing The Kraken'/TheKraken-*.exe TheKraken.exe && md5sum \
+  TheKraken.exe && file TheKraken.exe && ls -l TheKraken.exe
 \end{comando}
 \begin{salida}{Salida esperada}
 33b0654d8e104031155c999e2f163bbd  TheKraken.exe
 TheKraken.exe: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows
--rw-r--r-- 1 root root 932 Nov 12 05:54 TheKraken.exe
+-rw-r--r-- 1 root root 932 Nov 12 06:09 TheKraken.exe
 \end{salida}
 \begin{nota}\texttt{file} lo confunde con un ensamblado .NET (falso positivo causado por la cabecera manipulada). 932 bytes es un tamaño absurdo para un ejecutable de Windows normal.\end{nota}
 \captura{kraken-01}{Preparar la carpeta y verificar el fichero}
@@ -990,7 +1006,8 @@ Firma Authenticode: no
 \subsubsection*{Paso 4. Descompresor de Crinkler en el entry point}\label{paso:kraken-04}
 \addcontentsline{toc}{subsubsection}{Paso 4. Descompresor de Crinkler en el entry point}
 \begin{comando}{\textasciitilde{}/ctf/kraken}
-objdump -D -b binary -m i386 -M intel --start-address=0x5c --stop-address=0x8a TheKraken.exe | tail -n +8
+objdump -D -b binary -m i386 -M intel --start-address=0x5c --stop-address=0x8a \
+  TheKraken.exe | tail -n +8
 \end{comando}
 \begin{salida}{Salida esperada}
   5c:   53                      push   ebx
@@ -1025,7 +1042,7 @@ time python3 $S/kraken_emu.py TheKraken.exe unpacked.bin
 instrucciones emuladas: 1
 salto a código desempaquetado: 0x420000
 volcado 0x420000..0x430000 -> unpacked.bin
-python3 $S/kraken_emu.py TheKraken.exe unpacked.bin  13.79s user 0.25s system 98% cpu 14.200 total
+python3 $S/kraken_emu.py TheKraken.exe unpacked.bin  14.49s user 0.43s system 98% cpu 15.122 total
 \end{salida}
 \begin{nota}Se emula la CPU x86 hasta que el flujo salta a 0x420000 y se vuelca esa memoria.\end{nota}
 \captura{kraken-05}{Emular el descompresor con Unicorn (sin ejecutar el .exe)}
@@ -1033,7 +1050,8 @@ python3 $S/kraken_emu.py TheKraken.exe unpacked.bin  13.79s user 0.25s system 98
 \subsubsection*{Paso 6. Resolver de imports por hash (PEB -> kernel32)}\label{paso:kraken-06}
 \addcontentsline{toc}{subsubsection}{Paso 6. Resolver de imports por hash (PEB -> kernel32)}
 \begin{comando}{\textasciitilde{}/ctf/kraken}
-objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x420000 --stop-address=0x42007f unpacked.bin | tail -n +8 | head -45
+objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x420000 \
+  --stop-address=0x42007f unpacked.bin | tail -n +8 | head -45
 \end{comando}
 \begin{salida}{Salida esperada}
   420000:       bb 08 01 40 00          mov    ebx,0x400108
@@ -1088,7 +1106,8 @@ objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x42
 \subsubsection*{Paso 7. Main: llamada a [0x430000] y array cifrado de 23 bytes}\label{paso:kraken-07}
 \addcontentsline{toc}{subsubsection}{Paso 7. Main: llamada a [0x430000] y array cifrado de 23 bytes}
 \begin{comando}{\textasciitilde{}/ctf/kraken}
-objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x420193 --stop-address=0x420210 unpacked.bin | tail -n +8
+objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x420193 \
+  --stop-address=0x420210 unpacked.bin | tail -n +8
 \end{comando}
 \begin{salida}{Salida esperada}
   420193:       ff 15 00 00 43 00       call   DWORD PTR ds:0x430000
@@ -1129,7 +1148,8 @@ objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x42
 \subsubsection*{Paso 8. Bucle de descifrado y salida por [0x430010]}\label{paso:kraken-08}
 \addcontentsline{toc}{subsubsection}{Paso 8. Bucle de descifrado y salida por [0x430010]}
 \begin{comando}{\textasciitilde{}/ctf/kraken}
-objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x420210 --stop-address=0x420272 unpacked.bin | tail -n +8
+objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x420210 \
+  --stop-address=0x420272 unpacked.bin | tail -n +8
 \end{comando}
 \begin{salida}{Salida esperada}
   420210:       8b 45 d8                mov    eax,DWORD PTR [ebp-0x28]
@@ -1170,7 +1190,9 @@ objdump -D -b binary -m i386 -M intel --adjust-vma=0x420000 --start-address=0x42
 \subsubsection*{Paso 9. Lista de exports de kernel32 (Wine)}\label{paso:kraken-09}
 \addcontentsline{toc}{subsubsection}{Paso 9. Lista de exports de kernel32 (Wine)}
 \begin{comando}{\textasciitilde{}/ctf/kraken}
-curl -sSLo kernel32.spec https://raw.githubusercontent.com/wine-mirror/wine/master/dlls/kernel32/kernel32.spec && wc -l kernel32.spec
+curl -sSLo kernel32.spec \
+  https://raw.githubusercontent.com/wine-mirror/wine/master/dlls/kernel32/kernel32.spec \
+  && wc -l kernel32.spec
 \end{comando}
 \begin{salida}{Salida esperada}
 1740 kernel32.spec
@@ -1303,7 +1325,7 @@ dañina está relacionada con el mismo.
 \end{quote}
 
 \subsection{Ficheros analizados}
-\begin{longtable}{@{}p{0.30\linewidth}r p{0.50\linewidth}@{}}
+\begin{longtable}{@{}L{0.30\linewidth}r L{0.50\linewidth}@{}}
 \toprule \textbf{Fichero} & \textbf{Bytes} & \textbf{Descripción} \\ \midrule \endhead
 \texttt{suspicious\_.rar} & 835 & RAR 2.9 cifrado del enunciado (partes 1 y 2) \\ \nopagebreak
 \multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 6c51db1b0f92b7a8777c6822c2f9a8a5\quad SHA1 b7d5c1699bce2fa79ae15ceb6b1e83458f4cebfa} \\ \nopagebreak
@@ -1326,7 +1348,9 @@ dañina está relacionada con el mismo.
 \subsubsection*{Paso 1. Preparar la carpeta y verificar el RAR}\label{paso:spear-01}
 \addcontentsline{toc}{subsubsection}{Paso 1. Preparar la carpeta y verificar el RAR}
 \begin{comando}{\textasciitilde{}}
-mkdir -p ~/ctf/spear && cd ~/ctf/spear && cp ~/ctf/retos/'Reversing Spear Phising... Can you catch me'/suspicious_*.rar suspicious_.rar && md5sum suspicious_.rar
+mkdir -p ~/ctf/spear && cd ~/ctf/spear && cp \
+  ~/ctf/retos/'Reversing Spear Phising... Can you catch me'/suspicious_*.rar \
+  suspicious_.rar && md5sum suspicious_.rar
 \end{comando}
 \begin{salida}{Salida esperada}
 6c51db1b0f92b7a8777c6822c2f9a8a5  suspicious_.rar
@@ -1336,7 +1360,8 @@ mkdir -p ~/ctf/spear && cd ~/ctf/spear && cp ~/ctf/retos/'Reversing Spear Phisin
 \subsubsection*{Paso 2. Listar el RAR}\label{paso:spear-02}
 \addcontentsline{toc}{subsubsection}{Paso 2. Listar el RAR}
 \begin{comando}{\textasciitilde{}/ctf/spear}
-unrar lt -pinfected suspicious_.rar | grep -E 'Name|Type|Size|Packed|mtime|Flags|Compression'
+unrar lt -pinfected suspicious_.rar | grep \
+  -E 'Name|Type|Size|Packed|mtime|Flags|Compression'
 \end{comando}
 \begin{salida}{Salida esperada}
         Name: Nominas.rtf
@@ -1353,7 +1378,8 @@ unrar lt -pinfected suspicious_.rar | grep -E 'Name|Type|Size|Packed|mtime|Flags
 \subsubsection*{Paso 3. Extraer y verificar}\label{paso:spear-03}
 \addcontentsline{toc}{subsubsection}{Paso 3. Extraer y verificar}
 \begin{comando}{\textasciitilde{}/ctf/spear}
-unrar x -o+ -pinfected suspicious_.rar > /dev/null && ls -l Nominas.rtf && md5sum Nominas.rtf && file Nominas.rtf
+unrar x -o+ -pinfected suspicious_.rar > /dev/null && ls -l Nominas.rtf && md5sum \
+  Nominas.rtf && file Nominas.rtf
 \end{comando}
 \begin{salida}{Salida esperada}
 -rw-r--r-- 1 root root 5725 Sep  9  2017 Nominas.rtf
@@ -1391,7 +1417,8 @@ ffffffffffffffffffff
 \subsubsection*{Paso 5. Palabras de control y firmas clave}\label{paso:spear-05}
 \addcontentsline{toc}{subsubsection}{Paso 5. Palabras de control y firmas clave}
 \begin{comando}{\textasciitilde{}/ctf/spear}
-grep -oE 'objautlink|objupdate|objclass [A-Za-z.0-9]+|4f4c45324c696e6b|e0c9ea79f9bace118c8200aa004ba90b' Nominas.rtf | sort | uniq -c
+grep -oE -e objautlink -e objupdate -e 'objclass [A-Za-z.0-9]+' -e 4f4c45324c696e6b \
+  -e e0c9ea79f9bace118c8200aa004ba90b Nominas.rtf | sort | uniq -c
 \end{comando}
 \begin{salida}{Salida esperada}
       1 4f4c45324c696e6b
@@ -1556,7 +1583,7 @@ Herramientas & \texttt{7z}, \texttt{readelf}, \texttt{strings}, Python (\texttt{
 \begin{quote}\itshape Obtén el flag del siguiente binario. NOTA: el password del zip es infected.\end{quote}
 
 \subsection{Ficheros analizados}
-\begin{longtable}{@{}p{0.30\linewidth}r p{0.50\linewidth}@{}}
+\begin{longtable}{@{}L{0.30\linewidth}r L{0.50\linewidth}@{}}
 \toprule \textbf{Fichero} & \textbf{Bytes} & \textbf{Descripción} \\ \midrule \endhead
 \texttt{LetsGo.zip} & 876.630 & Zip cifrado del enunciado \\ \nopagebreak
 \multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 f6446fe1d43ecf9b26a6806d13528d11\quad SHA1 2bba2aab0e4c48737a14df3437680eb4337aea76} \\ \nopagebreak
@@ -1583,7 +1610,9 @@ Herramientas & \texttt{7z}, \texttt{readelf}, \texttt{strings}, Python (\texttt{
 Se usan comillas simples en la ruta: en \texttt{zsh} un \texttt{!} entre comillas dobles provoca expansión de historial.
 
 \begin{comando}{\textasciitilde{}}
-mkdir -p ~/ctf/gogogo && cd ~/ctf/gogogo && cp ~/ctf/retos/'Reversing Go go go!'/LetsGo-*.zip LetsGo.zip && md5sum LetsGo.zip && 7z x -y -pinfected LetsGo.zip | tail -3
+mkdir -p ~/ctf/gogogo && cd ~/ctf/gogogo && cp \
+  ~/ctf/retos/'Reversing Go go go!'/LetsGo-*.zip LetsGo.zip && md5sum LetsGo.zip && 7z x \
+  -y -pinfected LetsGo.zip | tail -3
 \end{comando}
 \begin{salida}{Salida esperada}
 f6446fe1d43ecf9b26a6806d13528d11  LetsGo.zip
@@ -1612,7 +1641,8 @@ LetsGo: ELF 32-bit MSB executable, MIPS, MIPS32 version 1 (SYSV), statically lin
 \subsubsection*{Paso 3. Versión de Go y secciones}\label{paso:go-03}
 \addcontentsline{toc}{subsubsection}{Paso 3. Versión de Go y secciones}
 \begin{comando}{\textasciitilde{}/ctf/gogogo}
-strings -n 6 LetsGo | grep -oE 'go1\.[0-9]+\.[0-9]+' | sort -u && readelf -S LetsGo | grep -E 'text|rodata|gopclntab'
+strings -n 6 LetsGo | grep -oE 'go1\.[0-9]+\.[0-9]+' | sort -u && readelf -S LetsGo | \
+  grep -E 'text|rodata|gopclntab'
 \end{comando}
 \begin{salida}{Salida esperada}
 go1.10.3
@@ -1645,7 +1675,9 @@ python3 $S/go_pclntab.py LetsGo main. | grep -v runtime
 \subsubsection*{Paso 5. Librerías de terceros y crypto usadas}\label{paso:go-05}
 \addcontentsline{toc}{subsubsection}{Paso 5. Librerías de terceros y crypto usadas}
 \begin{comando}{\textasciitilde{}/ctf/gogogo}
-python3 $S/go_pclntab.py LetsGo | grep -E 'goInfo\.GetInfo|go-figure\.(NewFigure|figure\.Print)$|aes\.NewCipher|cipher\.NewCFBDecrypter|base64\.\(\*Encoding\)\.DecodeString'
+python3 $S/go_pclntab.py LetsGo | grep -E -e 'goInfo\.GetInfo$' \
+  -e 'go-figure\.NewFigure$' -e 'figure\.Print$' -e 'aes\.NewCipher$' \
+  -e 'NewCFBDecrypter$' -e 'base64.*Encoding.*DecodeString$'
 \end{comando}
 \begin{salida}{Salida esperada}
 0x00082efc 0x00082f80 crypto/cipher.NewCFBDecrypter
@@ -1660,7 +1692,9 @@ python3 $S/go_pclntab.py LetsGo | grep -E 'goInfo\.GetInfo|go-figure\.(NewFigure
 \subsubsection*{Paso 6. Cadenas sospechosas}\label{paso:go-06}
 \addcontentsline{toc}{subsubsection}{Paso 6. Cadenas sospechosas}
 \begin{comando}{\textasciitilde{}/ctf/gogogo}
-strings -n 16 LetsGo | grep -oE 'wD5q[A-Za-z0-9_-]{60}|1KH1hb001Y09olU.|dwnoDlybPWZTYRdbFpit|Xa22SKeyAll1aadf1|GoOS:%v[A-Za-z:%v,]*CPUs:%v' | sort -u
+strings -n 16 LetsGo | grep -oE -e 'wD5q[A-Za-z0-9_-]{60}' -e '1KH1hb001Y09olU.' \
+  -e dwnoDlybPWZTYRdbFpit -e Xa22SKeyAll1aadf1 -e 'GoOS:%v[A-Za-z:%v,]*CPUs:%v' | sort \
+  -u
 \end{comando}
 \begin{salida}{Salida esperada}
 1KH1hb001Y09olU1
@@ -1690,7 +1724,8 @@ codigo de salida: 0
 \subsubsection*{Paso 8. Desensamblar main.main (MIPS, Capstone)}\label{paso:go-08}
 \addcontentsline{toc}{subsubsection}{Paso 8. Desensamblar main.main (MIPS, Capstone)}
 \begin{comando}{\textasciitilde{}/ctf/gogogo}
-python3 $S/go_mips_disasm.py LetsGo main.main > main_main.txt && wc -l main_main.txt && grep -E 'jal|"' main_main.txt | cut -c1-105
+python3 $S/go_mips_disasm.py LetsGo main.main > main_main.txt && wc -l main_main.txt && \
+  grep -E 'jal|"' main_main.txt | cut -c1-105
 \end{comando}
 \begin{salida}{Salida esperada}
 392 main_main.txt
@@ -1918,7 +1953,7 @@ binario dañino responsable de las conexiones. Objetivo: proporciona el MD5 del 
 \end{quote}
 
 \subsection{Ficheros analizados}
-\begin{longtable}{@{}p{0.30\linewidth}r p{0.50\linewidth}@{}}
+\begin{longtable}{@{}L{0.30\linewidth}r L{0.50\linewidth}@{}}
 \toprule \textbf{Fichero} & \textbf{Bytes} & \textbf{Descripción} \\ \midrule \endhead
 \texttt{evidencias.7z} & 870.091.187 & Evidencias (\texttt{evidencias\_sorvologaunt.7z}) \\ \nopagebreak
 \multicolumn{3}{l}{\hspace{1em}\footnotesize\ttfamily MD5 130decf0165501e8e53148035b057bd5\quad SHA1 a3358d79b6b24bd2afb5267a6bbe8672fd0613b6} \\ \nopagebreak
@@ -1970,7 +2005,9 @@ binario dañino responsable de las conexiones. Objetivo: proporciona el MD5 del 
 \subsubsection*{Paso 1. Preparar la carpeta y verificar la evidencia}\label{paso:horcrux-01}
 \addcontentsline{toc}{subsubsection}{Paso 1. Preparar la carpeta y verificar la evidencia}
 \begin{comando}{\textasciitilde{}}
-mkdir -p ~/ctf/horcrux && cd ~/ctf/horcrux && cp ~/ctf/retos/H0rr0crux/evidencias_sorvologaunt*.7z evidencias.7z && md5sum evidencias.7z
+mkdir -p ~/ctf/horcrux && cd ~/ctf/horcrux && cp \
+  ~/ctf/retos/H0rr0crux/evidencias_sorvologaunt*.7z evidencias.7z && md5sum \
+  evidencias.7z
 \end{comando}
 \begin{salida}{Salida esperada}
 130decf0165501e8e53148035b057bd5  evidencias.7z
@@ -2017,7 +2054,8 @@ Windows
 \subsubsection*{Paso 4. Qué artefactos hay}\label{paso:horcrux-04}
 \addcontentsline{toc}{subsubsection}{Paso 4. Qué artefactos hay}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-ls evid/Windows/appcompat/Programs evid/Windows/System32/sru evid/Users/Gregor | head -30; ls evid/Windows/Prefetch | wc -l; ls evid/Windows/System32/winevt/Logs | wc -l
+ls evid/Windows/appcompat/Programs evid/Windows/System32/sru evid/Users/Gregor | head \
+  -30; ls evid/Windows/Prefetch | wc -l; ls evid/Windows/System32/winevt/Logs | wc -l
 \end{comando}
 \begin{salida}{Salida esperada}
 evid/Users/Gregor:
@@ -2059,7 +2097,8 @@ SRU00017.log
 \subsubsection*{Paso 5. Prefetch con nombres sospechosos}\label{paso:horcrux-05}
 \addcontentsline{toc}{subsubsection}{Paso 5. Prefetch con nombres sospechosos}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-ls evid/Windows/Prefetch | grep -iE 'inject|packed|vmprotect|tor\.exe|runas|fodhelper|wevtutil|taskkill|^sc\.exe|ftk|hxd|httpd'
+ls evid/Windows/Prefetch | grep -iE -e inject -e packed -e vmprotect -e 'tor\.exe' \
+  -e runas -e fodhelper -e wevtutil -e taskkill -e '^sc\.exe' -e ftk -e hxd -e httpd
 \end{comando}
 \begin{salida}{Salida esperada}
 BYTECODEGENERATOR.EXE-C1E9BCE6.pf
@@ -2085,7 +2124,8 @@ WEVTUTIL.EXE-EF5861C4.pf
 \subsubsection*{Paso 6. Línea de tiempo de ejecuciones desde rutas de usuario}\label{paso:horcrux-06}
 \addcontentsline{toc}{subsubsection}{Paso 6. Línea de tiempo de ejecuciones desde rutas de usuario}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-bash $S/prefetch_timeline.sh evid/Windows/Prefetch 'USERS|PROGRAMDATA|TEMP' | grep -viE 'onedrive|google|brave|edge|chrome|defender|mpsigstub'
+bash $S/prefetch_timeline.sh evid/Windows/Prefetch 'USERS|PROGRAMDATA|TEMP' | grep \
+  -viE 'onedrive|google|brave|edge|chrome|defender|mpsigstub'
 \end{comando}
 \begin{salida}{Salida esperada}
 Dec 20, 2021 12:44:37.086364500 UTC | 1 | \USERS\GREGOR\APPDATA\LOCAL\TEMP\IS-KCM6S.TMP\WINSCP-5.19.5-SETUP.TMP
@@ -2108,7 +2148,8 @@ Dec 20, 2021 15:09:46.011103300 UTC | 1 | \USERS\GREGOR\APPDATA\LOCAL\TEMP\{FDE8
 \subsubsection*{Paso 7. Detalle de ejecuciones (runas, tor, wevtutil, inject)}\label{paso:horcrux-07}
 \addcontentsline{toc}{subsubsection}{Paso 7. Detalle de ejecuciones (runas, tor, wevtutil, inject)}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-for f in RUNAS TOR WEVTUTIL INJECT; do sccainfo evid/Windows/Prefetch/$f.EXE-*.pf | grep -E 'Executable filename|Run count|Last run time: [123]'; echo; done
+for f in RUNAS TOR WEVTUTIL INJECT; do sccainfo evid/Windows/Prefetch/$f.EXE-*.pf | grep \
+  -E 'Executable filename|Run count|Last run time: [123]'; echo; done
 \end{comando}
 \begin{salida}{Salida esperada}
         Executable filename             : RUNAS.EXE
@@ -2140,7 +2181,9 @@ for f in RUNAS TOR WEVTUTIL INJECT; do sccainfo evid/Windows/Prefetch/$f.EXE-*.p
 \subsubsection*{Paso 8. Amcache: SHA1 y metadatos de los ejecutables de Gregor}\label{paso:horcrux-08}
 \addcontentsline{toc}{subsubsection}{Paso 8. Amcache: SHA1 y metadatos de los ejecutables de Gregor}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-python3 $S/amcache_dump.py evid/Windows/appcompat/Programs/Amcache.hve --todo 2>/dev/null | grep -i 'users\\gregor' | grep -viE 'onedrive|google|brave|edge' | cut -f1,2,4,5,6
+python3 $S/amcache_dump.py evid/Windows/appcompat/Programs/Amcache.hve --todo \
+  2>/dev/null | grep -i 'users\\gregor' | grep -viE 'onedrive|google|brave|edge' | cut \
+  -f1,2,4,5,6
 \end{comando}
 \begin{salida}{Salida esperada}
 17de00205b7f464d70f8ecef14d7d1609b365fb2        56019336        accessdata      installshield setup.exe c:\users\gregor\desktop\ftk.exe
@@ -2160,7 +2203,9 @@ d35b0bcb01d0a10b0bb814e7b771bab77b99944a        11846088        martin prikryl  
 \subsubsection*{Paso 9. Windows Defender: detección de inject.exe}\label{paso:horcrux-09}
 \addcontentsline{toc}{subsubsection}{Paso 9. Windows Defender: detección de inject.exe}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-python3 $S/evtx_grep.py 'evid/Windows/System32/winevt/Logs/Microsoft-Windows-Windows Defender%4Operational.evtx' inject --ids 1116,1117 | grep -E 'EventID|Threat Name|Path|Action Name'
+python3 $S/evtx_grep.py \
+  'evid/Windows/System32/winevt/Logs/Microsoft-Windows-Windows Defender%4Operational.evtx' \
+  inject --ids 1116,1117 | grep -E 'EventID|Threat Name|Path|Action Name'
 \end{comando}
 \begin{salida}{Salida esperada}
 === EventID 1116  2021-12-20 13:08:04.212959
@@ -2205,7 +2250,9 @@ python3 $S/evtx_grep.py evid/Windows/System32/winevt/Logs/System.evtx inject
 \subsubsection*{Paso 11. Logs cortados (limpieza con wevtutil)}\label{paso:horcrux-11}
 \addcontentsline{toc}{subsubsection}{Paso 11. Logs cortados (limpieza con wevtutil)}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-cd evid/Windows/System32/winevt/Logs && python3 $S/evtx_range.py Application.evtx Security.evtx System.evtx 'Microsoft-Windows-Windows Defender%4Operational.evtx'; cd ~/ctf/horcrux
+cd evid/Windows/System32/winevt/Logs && python3 $S/evtx_range.py Application.evtx \
+  Security.evtx System.evtx 'Microsoft-Windows-Windows Defender%4Operational.evtx'; cd \
+  ~/ctf/horcrux
 \end{comando}
 \begin{salida}{Salida esperada}
 Application.evtx                                 407 eventos   2021-12-15 11:13:10  ->  2021-12-20 13:02:02
@@ -2219,7 +2266,8 @@ Microsoft-Windows-Windows Defender%4Operational.evtx     55 eventos   2021-12-15
 \subsubsection*{Paso 12. SRUM: exportar la base de datos}\label{paso:horcrux-12}
 \addcontentsline{toc}{subsubsection}{Paso 12. SRUM: exportar la base de datos}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-mkdir -p srum && cp evid/Windows/System32/sru/SRUDB.dat srum/ && cd srum && esedbexport -t srum SRUDB.dat | tail -2 && cd ..
+mkdir -p srum && cp evid/Windows/System32/sru/SRUDB.dat srum/ && cd srum && esedbexport \
+  -t srum SRUDB.dat | tail -2 && cd ..
 \end{comando}
 \begin{salida}{Salida esperada}
 Exporting table 15 ({D10CA2FE-6FCF-4F6D-848E-B2E99266FA86}) out of 15.
@@ -2230,7 +2278,8 @@ Export completed.
 \subsubsection*{Paso 13. SRUM: qué binarios de usuario usaron la red}\label{paso:horcrux-13}
 \addcontentsline{toc}{subsubsection}{Paso 13. SRUM: qué binarios de usuario usaron la red}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-python3 $S/srum_net.py srum/srum.export | grep -iE 'users\\gregor\\appdata\\(roaming|local\\temp)|users\\gregor\\downloads\\inject|runas'
+python3 $S/srum_net.py srum/srum.export | grep \
+  -iE 'users\\gregor\\appdata\\(roaming|local\\temp)|users\\gregor\\downloads\\inject|runas'
 \end{comando}
 \begin{salida}{Salida esperada}
 Dec 20, 2021 15:53:00.000000051 sent=800        recv=1214       \device\harddiskvolume2\users\gregor\appdata\roaming\microsoft\windows\httpd.exe
@@ -2290,7 +2339,9 @@ C:\Users\Gregor\AppData\Roaming\Microsoft\Windows\httpd.exe
 \subsubsection*{Paso 16. El binario ya no está en la evidencia}\label{paso:horcrux-16}
 \addcontentsline{toc}{subsubsection}{Paso 16. El binario ya no está en la evidencia}
 \begin{comando}{\textasciitilde{}/ctf/horcrux}
-cd evid && find . -type f -print0 | xargs -0 sha1sum | grep -ciE '409aea9461d03bff3e006d3e7e7c4790a0862170|99e107ca419959385ca57241fb6ed3796eaacc9e|de275b64985009d335ab85b38d26a3026739a68a'; cd ..
+cd evid && find . -type f -print0 | xargs -0 sha1sum | grep -ci -e \
+  409aea9461d03bff3e006d3e7e7c4790a0862170 -e 99e107ca419959385ca57241fb6ed3796eaacc9e \
+  -e de275b64985009d335ab85b38d26a3026739a68a; cd ..
 \end{comando}
 \begin{salida}{Salida esperada}
 0
@@ -2342,11 +2393,11 @@ Imports:
 
 \subsubsection*{Paso 18. Pivotar los SHA1 en VirusTotal (API v3)}\label{paso:horcrux-18}
 \addcontentsline{toc}{subsubsection}{Paso 18. Pivotar los SHA1 en VirusTotal (API v3)}
-Requiere una clave gratuita de VirusTotal (perfil $\to$ \emph{API key}). El \texttt{sleep 16} respeta el límite de 4 consultas por minuto.
+Requiere una clave gratuita de VirusTotal (perfil $\to$ \emph{API key}); sustituir \texttt{TU\_API\_KEY} por ella. El script espera 16~s entre consultas para respetar el límite de 4 por minuto. Tras el reto, conviene regenerar la clave.
 
 \begin{comando}{\textasciitilde{}/ctf}
-VT_KEY="TU_API_KEY"
-for h in 409aea9461d03bff3e006d3e7e7c4790a0862170 99e107ca419959385ca57241fb6ed3796eaacc9e de275b64985009d335ab85b38d26a3026739a68a; do echo "== $h"; curl -s -H "x-apikey: $VT_KEY" https://www.virustotal.com/api/v3/files/$h | jq -r '.data.attributes | "MD5: \(.md5)\nNombre: \(.meaningful_name)\nFamilia: \(.popular_threat_classification.suggested_threat_label)\nDetecciones: \(.last_analysis_stats.malicious)"'; sleep 16; done
+VT_KEY="TU_API_KEY" bash $S/vt_lookup.sh 409aea9461d03bff3e006d3e7e7c4790a0862170 \
+  99e107ca419959385ca57241fb6ed3796eaacc9e de275b64985009d335ab85b38d26a3026739a68a
 \end{comando}
 \begin{salida}{Salida obtenida en la máquina del usuario}
 == 409aea9461d03bff3e006d3e7e7c4790a0862170
@@ -2385,7 +2436,7 @@ Binario: \texttt{C:\bs Users\bs Gregor\bs AppData\bs Roaming\bs Microsoft\bs Win
 \hash{dbe0e10775e35a58e8ff463ccbe5f7d8}, detectado como \texttt{trojan.cobaltstrike/fugrafa}.
 
 \subsection{Línea de tiempo (20/12/2021, UTC)}
-\begin{longtable}{@{}p{2.3cm}p{9.6cm}p{3.2cm}@{}}
+\begin{longtable}{@{}L{2.3cm}L{9.6cm}L{3.2cm}@{}}
 \toprule
 \textbf{Hora} & \textbf{Evento} & \textbf{Fuente} \\ \midrule \endhead
 12:44--12:45 & Instalación de WinSCP 5.19.5 & Prefetch \\
@@ -2411,7 +2462,7 @@ Binario: \texttt{C:\bs Users\bs Gregor\bs AppData\bs Roaming\bs Microsoft\bs Win
 \end{longtable}
 
 \subsection{Candidatos y señuelos}
-\begin{longtable}{@{}p{3.6cm}p{6.2cm}p{5.3cm}@{}}
+\begin{longtable}{@{}L{3.6cm}L{6.2cm}L{5.3cm}@{}}
 \toprule
 \textbf{Binario} & \textbf{Qué es realmente} & \textbf{Veredicto} \\ \midrule \endhead
 \texttt{Downloads\bs inject.exe} & 226.304 B, x64. Defender: \texttt{Sabsik.TE.A!ml} (detección genérica por ML). No está en VirusTotal & Señuelo: \textbf{nunca llegó a ejecutarse} (faltaban DLL) \\
@@ -3100,6 +3151,26 @@ for r in rows("{973F5D5C-1D90-4944-BE8E-24B94231A174}.*"):
     app = idmap.get(r["AppId"], r["AppId"])
     print(f"{r['TimeStamp']}\tsent={r['BytesSent']}\trecv={r['BytesRecvd']}\t{app}")
 \end{codigopython}
+\subsection{\texttt{vt\_lookup.sh}}
+\begin{codigobash}{vt\_lookup.sh}
+#!/usr/bin/env bash
+# Consulta hashes (MD5/SHA1/SHA256) en la API v3 de VirusTotal y muestra MD5, nombre,
+# familia sugerida y número de detecciones.
+# Requiere: curl, jq y una clave de API gratuita de VirusTotal en la variable VT_KEY.
+# Uso: VT_KEY="tu_clave" bash vt_lookup.sh HASH [HASH ...]
+# La API gratuita admite 4 consultas por minuto: se espera 16 s entre consultas.
+set -u
+: "${VT_KEY:?Define VT_KEY con tu clave de API de VirusTotal}"
+n=0
+for h in "$@"; do
+  [ "$n" -gt 0 ] && sleep 16
+  n=$((n + 1))
+  echo "== $h"
+  curl -s -H "x-apikey: $VT_KEY" "https://www.virustotal.com/api/v3/files/$h" | jq -r '
+    .data.attributes
+    | "MD5: \(.md5)\nNombre: \(.meaningful_name)\nFamilia: \(.popular_threat_classification.suggested_threat_label)\nDetecciones: \(.last_analysis_stats.malicious)"'
+done
+\end{codigobash}
 
 
 \section{Referencias}

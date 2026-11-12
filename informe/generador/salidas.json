@@ -1,0 +1,302 @@
+{
+ "prep-10": {
+  "cwd": "~",
+  "out": "1b6dab75acda2553506501bc713093f798aaf342e0e117ea1e46333a1822aa35  retos.zip"
+ },
+ "prep-11": {
+  "cwd": "~/ctf",
+  "out": "Folders: 6\nFiles: 11\nSize:       871821825\nCompressed: 871822107"
+ },
+ "prep-12": {
+  "cwd": "~/ctf",
+  "out": "H0rr0crux\nReversing CCN-Cry\nReversing Go go go!\nReversing Spear Phising... Can you catch me\nReversing The Kraken"
+ },
+ "ccn-01": {
+  "cwd": "~",
+  "out": "total 48\n-rw-r--r-- 1 root root    24 Nov 12 06:09 Secret.txt.CCN_CRY\n-rw-r--r-- 1 root root 41844 Nov 12 06:09 evidencia.zip"
+ },
+ "ccn-02": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "fc04df37aeca594a00cb1844c3bbb980  evidencia.zip\nfba2221b98cb79397ef87876c1c70938  Secret.txt.CCN_CRY"
+ },
+ "ccn-03": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "00000000: ea04 6223 4ee0 a00d eebe f992 c483 6467  ..b#N.........dg\n00000010: 16a1 8947 2475 c3fc                      ...G$u.."
+ },
+ "ccn-04": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "Archive:  evidencia.zip\n   skipping: incident-a1000032.pcapng  need PK compat. v5.1 (can do v4.6)"
+ },
+ "ccn-05": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "Path = evidencia.zip\nPath = incident-a1000032.pcapng\nSize = 197076\nEncrypted = +\nMethod = AES-128 Deflate"
+ },
+ "ccn-06": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "Size:       197076\nCompressed: 41844\n-rw-r--r-- 1 root root 197076 Jan  9  2019 incident-a1000032.pcapng"
+ },
+ "ccn-07": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "File type:           Wireshark/... - pcapng\nNumber of packets:   2112\nFile size:           197 kB\nCapture duration:    116.876137466 seconds\nFirst packet time:   2019-01-09 17:14:17.835216654\nLast packet time:    2019-01-09 17:16:14.711354120\n                     Number of packets = 2112"
+ },
+ "ccn-08": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "===================================================================\nProtocol Hierarchy Statistics\nFilter: \n\neth                                      frames:2112 bytes:126996\n  ip                                     frames:2112 bytes:126996\n    tcp                                  frames:2112 bytes:126996\n      http                               frames:3 bytes:6574\n        media                            frames:1 bytes:6173\n==================================================================="
+ },
+ "ccn-09": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "================================================================================\nTCP Conversations\nFilter:<No Filter>\n                                                           |       <-      | |       ->      | |     Total     |    Relative    |   Duration   |\n                                                           | Frames  Bytes | | Frames  Bytes | | Frames  Bytes |      Start     |              |\n192.168.1.41:60212         <-> 192.168.1.37:80                  4 6379 bytes       6 552 bytes      10 6931 bytes     0.000000000         0.0031\n192.168.1.41:45988         <-> 192.168.1.37:8080                3 206 bytes       5 459 bytes       8 665 bytes     0.007735631         0.0010\n192.168.1.41:63903         <-> 192.168.1.37:22                  1 58 bytes        2 120 bytes       3 178 bytes   112.059715807         0.0003\n192.168.1.41:63903         <-> 192.168.1.37:80                  1 58 bytes        2 120 bytes       3 178 bytes   113.161928249         0.0003"
+ },
+ "ccn-10": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "4\t192.168.1.41\t192.168.1.37\t80\t192.168.1.37\t/wget.tar.gz\t\n14\t192.168.1.41\t192.168.1.37\t8080\twww.aarkaposleeqaasssf.tk\t/user.php\tgAu,UovL8;,B2fOT1xRZa?r3wpvD856r:B;?ShTiD:oat12"
+ },
+ "ccn-11": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "===================================================================\nFollow: tcp,ascii\nFilter: tcp.stream eq 1\nNode 0: 192.168.1.41:45988\nNode 1: 192.168.1.37:8080\n121\nGET /user.php HTTP/1.0\nHost: www.aarkaposleeqaasssf.tk\nContent-type: gAu,UovL8;,B2fOT1xRZa?r3wpvD856r:B;?ShTiD:oat12\n\n\n==================================================================="
+ },
+ "ccn-12": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "total 8\n-rw-r--r-- 1 root root 5811 Nov 12 06:09 wget.tar.gz"
+ },
+ "ccn-13": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "-rwxr-xr-x root/root     14936 2019-01-09 17:03 ccn_cry\nccn_cry: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=5fe8fb54bbc1f32d570ad4892be5b21db657f966, stripped\ne1e1d64b6d6349ed81fa4ee0913ef931  ccn_cry"
+ },
+ "ccn-14": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "0000000000000000      DF *UND*\t0000000000000000 (OPENSSL_1_1_0) EVP_CipherInit_ex\n0000000000000000      DF *UND*\t0000000000000000 (OPENSSL_1_1_0) EVP_bf_cbc\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) opendir\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) connect\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) gethostname\n0000000000000000      DF *UND*\t0000000000000000 (OPENSSL_1_1_0) EVP_CIPHER_CTX_set_key_length\n0000000000000000      DF *UND*\t0000000000000000 (OPENSSL_1_1_0) EVP_CIPHER_CTX_new\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) socket\n0000000000000000      DF *UND*\t0000000000000000 (OPENSSL_1_1_0) EVP_CipherFinal_ex\n0000000000000000      DF *UND*\t0000000000000000 (OPENSSL_1_1_0) EVP_CIPHER_CTX_reset\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) srand\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) remove\n0000000000000000      DF *UND*\t0000000000000000 (OPENSSL_1_1_0) EVP_CipherUpdate\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) rand\n0000000000000000      DF *UND*\t0000000000000000 (GLIBC_2.2.5) time"
+ },
+ "ccn-15": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": ".CCN_CRYH\n/home/robertM/\nwww.aarkaposleeqaasssf.tk\nGET /user.php HTTP/1.0\nContent-type: %s\nKey= %s  iv= %s (%s)\nabcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789,.-#@$%&(){};'?!"
+ },
+ "ccn-16": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "0000000000001cdf <.text+0xb1f>:\n    1cdf:\tpush   rbp\n    1ce0:\tmov    rbp,rsp\n    1ce3:\tsub    rsp,0x450\n    1cea:\tmov    QWORD PTR [rbp-0x438],rdi\n    1cf1:\tmov    QWORD PTR [rbp-0x440],rsi\n    1cf8:\tmov    QWORD PTR [rbp-0x448],rdx\n    1cff:\tmov    edi,0x8\n    1d04:\tcall   19f4 <__cxa_finalize@plt+0x844>\n    1d09:\tmov    QWORD PTR [rbp-0x8],rax\n    1d0d:\tmov    edi,0x20\n    1d12:\tcall   19f4 <__cxa_finalize@plt+0x844>\n    1d17:\tmov    QWORD PTR [rbp-0x10],rax\n    1d1b:\tlea    rax,[rbp-0x430]\n    1d22:\tmov    esi,0x400\n    1d27:\tmov    rdi,rax\n    1d2a:\tcall   1060 <gethostname@plt>\n    1d2f:\tmov    rcx,QWORD PTR [rbp-0x8]\n    1d33:\tmov    rdx,QWORD PTR [rbp-0x10]\n    1d37:\tlea    rsi,[rbp-0x430]\n    1d3e:\tmov    rax,QWORD PTR [rbp-0x440]\n    1d45:\tmov    rdi,rax\n    1d48:\tcall   1a97 <__cxa_finalize@plt+0x8e7>"
+ },
+ "ccn-17": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "0000000000001a23 <.text+0x863>:\n    1a23:\tcall   1160 <rand@plt>\n    1a28:\tmov    ecx,eax\n    1a2a:\tmov    edx,0xd20d20d3\n    1a2f:\tmov    eax,ecx\n    1a31:\timul   edx\n    1a33:\tlea    eax,[rdx+rcx*1]\n    1a36:\tsar    eax,0x6\n    1a39:\tmov    edx,eax\n    1a3b:\tmov    eax,ecx\n    1a3d:\tsar    eax,0x1f\n    1a40:\tsub    edx,eax\n    1a42:\tmov    eax,edx\n    1a44:\tmov    DWORD PTR [rbp-0x14],eax\n    1a47:\tmov    eax,DWORD PTR [rbp-0x14]\n    1a4a:\timul   eax,eax,0x4e\n    1a4d:\tsub    ecx,eax\n    1a4f:\tmov    eax,ecx\n    1a51:\tmov    DWORD PTR [rbp-0x14],eax\n    1a54:\tmov    eax,DWORD PTR [rbp-0x4]\n    1a57:\tmovsxd rdx,eax\n    1a5a:\tmov    rax,QWORD PTR [rbp-0x10]\n    1a5e:\tlea    rcx,[rdx+rax*1]\n    1a62:\tmov    eax,DWORD PTR [rbp-0x14]\n    1a65:\tmovsxd rdx,eax\n    1a68:\tlea    rax,[rip+0x201731]        # 2031a0 <__cxa_finalize@plt+0x201ff0>\n    1a6f:\tmovzx  eax,BYTE PTR [rdx+rax*1]"
+ },
+ "ccn-18": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "    16f1:\tcall   10e0 <strcpy@plt>\n    171f:\tmov    WORD PTR [rax],0x3a\n    1739:\tcall   1040 <strcat@plt>\n    1767:\tmov    WORD PTR [rax],0x3a\n    1781:\tcall   1040 <strcat@plt>\n    17af:\tmov    WORD PTR [rax],0xa"
+ },
+ "ccn-19": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "0000000000002064 <.text+0xea4>:\n    2064:\tmov    rax,QWORD PTR [rbp-0x60]\n    2068:\tmov    rdi,rax\n    206b:\tcall   10c0 <EVP_CIPHER_CTX_reset@plt>\n    2070:\tcall   fa0 <EVP_bf_cbc@plt>\n    2075:\tmov    rsi,rax\n    2078:\tmov    rax,QWORD PTR [rbp-0x60]\n    207c:\tmov    r9d,0x1\n    2082:\tmov    r8d,0x0\n    2088:\tmov    ecx,0x0\n    208d:\tmov    edx,0x0\n    2092:\tmov    rdi,rax\n    2095:\tcall   f30 <EVP_CipherInit_ex@plt>\n    209a:\tmov    rax,QWORD PTR [rbp-0x60]\n    209e:\tmov    esi,0x10\n    20a3:\tmov    rdi,rax\n    20a6:\tcall   1070 <EVP_CIPHER_CTX_set_key_length@plt>\n    20ab:\tmov    rcx,QWORD PTR [rbp-0x90]\n    20b2:\tmov    rdx,QWORD PTR [rbp-0x88]\n    20b9:\tmov    rax,QWORD PTR [rbp-0x60]\n    20bd:\tmov    r9d,0x1\n    20c3:\tmov    r8,rcx\n    20c6:\tmov    rcx,rdx\n    20c9:\tmov    edx,0x0\n    20ce:\tmov    esi,0x0\n    20d3:\tmov    rdi,rax\n    20d6:\tcall   f30 <EVP_CipherInit_ex@plt>"
+ },
+ "ccn-20": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "KEY=[gAu,UovL8;,B2fOT]  IV=[B;?ShTiD]\n6741752c556f764c383b2c4232664f54\n423b3f5368546944"
+ },
+ "ccn-21": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "Flag: JosephPopp1989"
+ },
+ "ccn-22": {
+  "cwd": "~/ctf/ccn-cry",
+  "out": "c890082bbb38d2aad5eb182cac9fbc7e  -"
+ },
+ "kraken-01": {
+  "cwd": "~",
+  "out": "33b0654d8e104031155c999e2f163bbd  TheKraken.exe\nTheKraken.exe: PE32 executable (console) Intel 80386 Mono/.Net assembly, for MS Windows\n-rw-r--r-- 1 root root 932 Nov 12 06:09 TheKraken.exe"
+ },
+ "kraken-02": {
+  "cwd": "~/ctf/kraken",
+  "out": "00000000: 4d5a 3233 5045 0000 4c01 0000 01db 617f  MZ23PE..L.....a.\n00000010: 10d0 1773 7547 ebf9 0800 0200 0b01 11c9  ...suG..........\n00000020: 4585 c079 1f01 d350 f7e2 903d 5c00 0000  E..y...P...=\\...\n00000030: f7f3 39c1 19db eb48 0000 4000 0400 0000  ..9....H..@.....\n00000040: 0400 0000 0fa3 2d44 0140 008d 0400 ebce  ......-D.@......\n00000050: 0000 0000 ebb6 421f 4000 0000 5331 edbb  ......B.@...S1..\n00000060: 0300 0000 90be 2801 4000 6a01 58bf 0000  ......(.@.j.X...\n00000070: 4200 b100 9057 eb12 0000 0000 0000 0000  B....W.........."
+ },
+ "kraken-03": {
+  "cwd": "~/ctf/kraken",
+  "out": "Machine          : 0x14c  (x86)\nTimeDateStamp    : 2037-09-21 04:18:09 UTC\ne_lfanew         : 0x4\nNumberOfSections : 0\nImageBase        : 0x400000\nEntryPoint (RVA) : 0x5c\nSizeOfImage      : 0x1f42b6eb  (500.2 MB)\nSubsystem        : 3\nDataDirectories  : 0\nFirma Authenticode: no"
+ },
+ "kraken-04": {
+  "cwd": "~/ctf/kraken",
+  "out": "  5c:\t53                   \tpush   ebx\n  5d:\t31 ed                \txor    ebp,ebp\n  5f:\tbb 03 00 00 00       \tmov    ebx,0x3\n  64:\t90                   \tnop\n  65:\tbe 28 01 40 00       \tmov    esi,0x400128\n  6a:\t6a 01                \tpush   0x1\n  6c:\t58                   \tpop    eax\n  6d:\tbf 00 00 42 00       \tmov    edi,0x420000\n  72:\tb1 00                \tmov    cl,0x0\n  74:\t90                   \tnop\n  75:\t57                   \tpush   edi\n  76:\teb 12                \tjmp    0x8a\n\t...\n  80:\t5a                   \tpop    edx\n  81:\t72 07                \tjb     0x8a\n  83:\t92                   \txchg   edx,eax\n  84:\t29 d1                \tsub    ecx,edx\n  86:\t04 00                \tadd    al,0x0\n  88:\t29 d0                \tsub    eax,edx"
+ },
+ "kraken-05": {
+  "cwd": "~/ctf/kraken",
+  "out": "instrucciones emuladas: 1\nsalto a código desempaquetado: 0x420000\nvolcado 0x420000..0x430000 -> unpacked.bin\npython3 $S/kraken_emu.py TheKraken.exe unpacked.bin  14.49s user 0.43s system 98% cpu 15.122 total"
+ },
+ "kraken-06": {
+  "cwd": "~/ctf/kraken",
+  "out": "  420000:\tbb 08 01 40 00       \tmov    ebx,0x400108\n  420005:\tbe b8 03 42 00       \tmov    esi,0x4203b8\n  42000a:\tbf 00 00 43 00       \tmov    edi,0x430000\n  42000f:\t58                   \tpop    eax\n  420010:\t8b 40 0c             \tmov    eax,DWORD PTR [eax+0xc]\n  420013:\t8b 40 0c             \tmov    eax,DWORD PTR [eax+0xc]\n  420016:\t8b 00                \tmov    eax,DWORD PTR [eax]\n  420018:\t8b 00                \tmov    eax,DWORD PTR [eax]\n  42001a:\t8b 68 18             \tmov    ebp,DWORD PTR [eax+0x18]\n  42001d:\t31 c0                \txor    eax,eax\n  42001f:\tac                   \tlods   al,BYTE PTR ds:[esi]\n  420020:\t91                   \txchg   ecx,eax\n  420021:\t60                   \tpusha\n  420022:\t8b 45 3c             \tmov    eax,DWORD PTR [ebp+0x3c]\n  420025:\t01 e8                \tadd    eax,ebp\n  420027:\t8b 50 78             \tmov    edx,DWORD PTR [eax+0x78]\n  42002a:\t01 ea                \tadd    edx,ebp\n  42002c:\t8b 4a 18             \tmov    ecx,DWORD PTR [edx+0x18]\n  42002f:\t8b 42 20             \tmov    eax,DWORD PTR [edx+0x20]\n  420032:\t01 e8                \tadd    eax,ebp\n  420034:\t8b 74 88 fc          \tmov    esi,DWORD PTR [eax+ecx*4-0x4]\n  420038:\t01 ee                \tadd    esi,ebp\n  42003a:\t31 ff                \txor    edi,edi\n  42003c:\tc1 c7 06             \trol    edi,0x6\n  42003f:\t31 c0                \txor    eax,eax\n  420041:\tac                   \tlods   al,BYTE PTR ds:[esi]\n  420042:\t31 c7                \txor    edi,eax\n  420044:\t48                   \tdec    eax\n  420045:\t7d f5                \tjge    0x42003c\n  420047:\t3b 3b                \tcmp    edi,DWORD PTR [ebx]\n  420049:\te0 e4                \tloopne 0x42002f\n  42004b:\t8b 42 24             \tmov    eax,DWORD PTR [edx+0x24]\n  42004e:\t01 e8                \tadd    eax,ebp\n  420050:\t66 8b 0c 48          \tmov    cx,WORD PTR [eax+ecx*2]\n  420054:\t8b 42 1c             \tmov    eax,DWORD PTR [edx+0x1c]\n  420057:\t01 e8                \tadd    eax,ebp\n  420059:\t8b 04 88             \tmov    eax,DWORD PTR [eax+ecx*4]\n  42005c:\t89 44 24 1c          \tmov    DWORD PTR [esp+0x1c],eax\n  420060:\t61                   \tpopa\n  420061:\t01 e8                \tadd    eax,ebp\n  420063:\tab                   \tstos   DWORD PTR es:[edi],eax\n  420064:\t83 c3 04             \tadd    ebx,0x4\n  420067:\te2 b8                \tloop   0x420021\n  420069:\t56                   \tpush   esi\n  42006a:\tff 15 0c 00 43 00    \tcall   DWORD PTR ds:0x43000c"
+ },
+ "kraken-07": {
+  "cwd": "~/ctf/kraken",
+  "out": "  420193:\tff 15 00 00 43 00    \tcall   DWORD PTR ds:0x430000\n  420199:\t89 45 c0             \tmov    DWORD PTR [ebp-0x40],eax\n  42019c:\tc6 45 e4 e5          \tmov    BYTE PTR [ebp-0x1c],0xe5\n  4201a0:\tc6 45 e5 7a          \tmov    BYTE PTR [ebp-0x1b],0x7a\n  4201a4:\tc6 45 e6 77          \tmov    BYTE PTR [ebp-0x1a],0x77\n  4201a8:\tc6 45 e7 fb          \tmov    BYTE PTR [ebp-0x19],0xfb\n  4201ac:\tc6 45 e8 e1          \tmov    BYTE PTR [ebp-0x18],0xe1\n  4201b0:\tc6 45 e9 56          \tmov    BYTE PTR [ebp-0x17],0x56\n  4201b4:\tc6 45 ea 68          \tmov    BYTE PTR [ebp-0x16],0x68\n  4201b8:\tc6 45 eb fd          \tmov    BYTE PTR [ebp-0x15],0xfd\n  4201bc:\tc6 45 ec fd          \tmov    BYTE PTR [ebp-0x14],0xfd\n  4201c0:\tc6 45 ed f8          \tmov    BYTE PTR [ebp-0x13],0xf8\n  4201c4:\tc6 45 ee 79          \tmov    BYTE PTR [ebp-0x12],0x79\n  4201c8:\tc6 45 ef 01          \tmov    BYTE PTR [ebp-0x11],0x1\n  4201cc:\tc6 45 f0 02          \tmov    BYTE PTR [ebp-0x10],0x2\n  4201d0:\tc6 45 f1 ff          \tmov    BYTE PTR [ebp-0xf],0xff\n  4201d4:\tc6 45 f2 7d          \tmov    BYTE PTR [ebp-0xe],0x7d\n  4201d8:\tc6 45 f3 83          \tmov    BYTE PTR [ebp-0xd],0x83\n  4201dc:\tc6 45 f4 7e          \tmov    BYTE PTR [ebp-0xc],0x7e\n  4201e0:\tc6 45 f5 86          \tmov    BYTE PTR [ebp-0xb],0x86\n  4201e4:\tc6 45 f6 67          \tmov    BYTE PTR [ebp-0xa],0x67\n  4201e8:\tc6 45 f7 66          \tmov    BYTE PTR [ebp-0x9],0x66\n  4201ec:\tc6 45 f8 64          \tmov    BYTE PTR [ebp-0x8],0x64\n  4201f0:\tc6 45 f9 66          \tmov    BYTE PTR [ebp-0x7],0x66\n  4201f4:\tc6 45 fa cd          \tmov    BYTE PTR [ebp-0x6],0xcd\n  4201f8:\tc7 45 d8 00 00 00 00 \tmov    DWORD PTR [ebp-0x28],0x0\n  4201ff:\teb 09                \tjmp    0x42020a\n  420201:\t8b 55 d8             \tmov    edx,DWORD PTR [ebp-0x28]\n  420204:\t83 c2 01             \tadd    edx,0x1\n  420207:\t89 55 d8             \tmov    DWORD PTR [ebp-0x28],edx\n  42020a:\t83 7d d8 17          \tcmp    DWORD PTR [ebp-0x28],0x17\n  42020e:\t73 56                \tjae    0x420266"
+ },
+ "kraken-08": {
+  "cwd": "~/ctf/kraken",
+  "out": "  420210:\t8b 45 d8             \tmov    eax,DWORD PTR [ebp-0x28]\n  420213:\t8a 4c 05 e4          \tmov    cl,BYTE PTR [ebp+eax*1-0x1c]\n  420217:\t88 4d e3             \tmov    BYTE PTR [ebp-0x1d],cl\n  42021a:\t0f b6 55 e3          \tmovzx  edx,BYTE PTR [ebp-0x1d]\n  42021e:\t83 f2 7c             \txor    edx,0x7c\n  420221:\t88 55 e3             \tmov    BYTE PTR [ebp-0x1d],dl\n  420224:\t8b 45 c0             \tmov    eax,DWORD PTR [ebp-0x40]\n  420227:\t25 ff 00 00 00       \tand    eax,0xff\n  42022c:\t0f b6 4d e3          \tmovzx  ecx,BYTE PTR [ebp-0x1d]\n  420230:\t03 c8                \tadd    ecx,eax\n  420232:\t88 4d e3             \tmov    BYTE PTR [ebp-0x1d],cl\n  420235:\t0f b6 55 e3          \tmovzx  edx,BYTE PTR [ebp-0x1d]\n  420239:\tf7 da                \tneg    edx\n  42023b:\t88 55 e3             \tmov    BYTE PTR [ebp-0x1d],dl\n  42023e:\t0f b6 45 e3          \tmovzx  eax,BYTE PTR [ebp-0x1d]\n  420242:\tc1 f8 07             \tsar    eax,0x7\n  420245:\t0f b6 4d e3          \tmovzx  ecx,BYTE PTR [ebp-0x1d]\n  420249:\td1 e1                \tshl    ecx,1\n  42024b:\t0b c1                \tor     eax,ecx\n  42024d:\t88 45 e3             \tmov    BYTE PTR [ebp-0x1d],al\n  420250:\t0f b6 55 e3          \tmovzx  edx,BYTE PTR [ebp-0x1d]\n  420254:\t2b 55 d8             \tsub    edx,DWORD PTR [ebp-0x28]\n  420257:\t88 55 e3             \tmov    BYTE PTR [ebp-0x1d],dl\n  42025a:\t8b 45 d8             \tmov    eax,DWORD PTR [ebp-0x28]\n  42025d:\t8a 4d e3             \tmov    cl,BYTE PTR [ebp-0x1d]\n  420260:\t88 4c 05 e4          \tmov    BYTE PTR [ebp+eax*1-0x1c],cl\n  420264:\teb 9b                \tjmp    0x420201\n  420266:\t8d 55 e4             \tlea    edx,[ebp-0x1c]\n  420269:\t52                   \tpush   edx\n  42026a:\tff 15 10 00 43 00    \tcall   DWORD PTR ds:0x430010\n  420270:\t33 c0                \txor    eax,eax"
+ },
+ "kraken-09": {
+  "cwd": "~/ctf/kraken",
+  "out": "1740 kernel32.spec"
+ },
+ "kraken-10": {
+  "cwd": "~/ctf/kraken",
+  "out": "== Imports resueltos (IAT en 0x430000) ==\n  [0x430000]  hash=0x35002069  ->  GetACP\n  [0x430004]  hash=0x3d4b4991  ->  GetCurrentProcess\n  [0x430008]  hash=0x02aef17b  ->  IsProcessorFeaturePresent\n  [0x43000c]  hash=0xe9826fc6  ->  LoadLibraryA\n  [0x430010]  hash=0x12d183bb  ->  OutputDebugStringA\n  [0x430014]  hash=0x06a232ca  ->  SetUnhandledExceptionFilter\n  [0x430018]  hash=0x3ccc4310  ->  TerminateProcess\n  [0x43001c]  hash=0x4ba23380  ->  UnhandledExceptionFilter\n\n== Candidatos legibles según el byte bajo devuelto por [0x430000] ==\n  k=0x44 ( 68): 'Flag: Kongespeilet1250' + '\\x00'"
+ },
+ "kraken-11": {
+  "cwd": "~/ctf/kraken",
+  "out": "d11c2e023a6a0fb3105121dade32232b  -"
+ },
+ "spear-01": {
+  "cwd": "~",
+  "out": "6c51db1b0f92b7a8777c6822c2f9a8a5  suspicious_.rar"
+ },
+ "spear-02": {
+  "cwd": "~/ctf/spear",
+  "out": "        Name: Nominas.rtf\n        Type: File\n        Size: 5725\n Packed size: 752\n       mtime: 2017-09-09 18:11:08,729711700\n Compression: RAR 1.5(v29) -m3 -md=128k\n       Flags: encrypted "
+ },
+ "spear-03": {
+  "cwd": "~/ctf/spear",
+  "out": "-rw-r--r-- 1 root root 5725 Sep  9  2017 Nominas.rtf\n799417ddacb87275c7121e1620415be3  Nominas.rtf\nNominas.rtf: Rich Text Format data, version 1, ANSI, code page 1252, default middle east language ID 1025"
+ },
+ "spear-04": {
+  "cwd": "~/ctf/spear",
+  "out": "{\\rtf1\\adeflang1025\\ansi\\ansicpg1252\\uc1\\adeff31507\\deff0\\stshfdbch31505\\stshfloch31506\\stshfhich31506\\stshfbi31507\\deflang1033\\deflangfe2052\\themelang1033\\themelangfe2052\\themelangcs0\n{\\info\n{\\author }\n{\\operator }\n}\n{\\*\\xmlnstbl {\\xmlns1 http://schemas.microsoft.com/office/word/2003/wordml}}\n{\n{\\object\\objautlink\\objupdate\\rsltpict\\objw291\\objh230\\objscalex99\\objscaley101\n{\\*\\objclass Word.Document.8}\n{\\*\\objdata 0105000002000000\n090000004f4c45324c696e6b000000000000000000000a0000\nd0cf11e0a1b11ae1000000000000000000000000000000003e000300feff0900060000000000000000000000010000000100000000000000001000000200000001000000feffffff0000000000000000ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff\nffffffffffffffffffff"
+ },
+ "spear-05": {
+  "cwd": "~/ctf/spear",
+  "out": "      1 4f4c45324c696e6b\n      1 e0c9ea79f9bace118c8200aa004ba90b\n      1 objautlink\n      1 objclass Word.Document.8\n      1 objupdate"
+ },
+ "spear-06": {
+  "cwd": "~/ctf/spear",
+  "out": "OLE2Link"
+ },
+ "spear-07": {
+  "cwd": "~/ctf/spear",
+  "out": "===============================================================================\nFile: 'Nominas.rtf' - size: 5725 bytes\n---+----------+---------------------------------------------------------------\nid |index     |OLE Object                                                     \n---+----------+---------------------------------------------------------------\n0  |000001A2h |format_id: 2 (Embedded)                                        \n   |          |class name: b'OLE2Link'                                        \n   |          |data size: 2560                                                \n   |          |MD5 = '9fef81351c107c98ad700549735f3bf8'                       \n   |          |CLSID: 00000300-0000-0000-C000-000000000046                    \n   |          |StdOleLink (embedded OLE object - Known Related to             \n   |          |CVE-2017-0199, CVE-2017-8570, CVE-2017-8759 or CVE-2018-8174)  \n   |          |Possibly an exploit for the OLE2Link vulnerability (VU#921560, \n   |          |CVE-2017-0199)                                                 \n   |          |URL extracted: http://dagobah.local/logo.doc                   \n---+----------+---------------------------------------------------------------"
+ },
+ "spear-08": {
+  "cwd": "~/ctf/spear",
+  "out": "objeto 0: URL Moniker en offset 0x83d, campo de 140 bytes\n  URL exacta: 'http://dagobah.local/logo.doc'  (29 caracteres)"
+ },
+ "spear-09": {
+  "cwd": "~/ctf/spear",
+  "out": "93b146d21d3bdc8635836f8a11ba62b9  -\nfb7534ecc904766563ad711331a11121  -"
+ },
+ "go-01": {
+  "cwd": "~",
+  "out": "f6446fe1d43ecf9b26a6806d13528d11  LetsGo.zip\n\nSize:       2263808\nCompressed: 876630"
+ },
+ "go-02": {
+  "cwd": "~/ctf/gogogo",
+  "out": "LetsGo: ELF 32-bit MSB executable, MIPS, MIPS32 version 1 (SYSV), statically linked, Go BuildID=sfhqOhnt3GK05ZxcfeUj/SBhFt-HoqAis9tYiBDh3/mTANZGQwwTBKudzVtd4C/wibtVeoI1L7toIwooYa9, stripped\n235991ea447e7406d1c3904eada80097  LetsGo\n  Class:                             ELF32\n  Data:                              2's complement, big endian\n  Machine:                           MIPS R3000\n  Entry point address:               0x70f40"
+ },
+ "go-03": {
+  "cwd": "~/ctf/gogogo",
+  "out": "go1.10.3\n  [ 1] .text             PROGBITS        00011000 001000 1095bc 00  AX  0   0  4\n  [ 2] .rodata           PROGBITS        00120000 110000 04ce1e 00   A  0   0 32\n  [ 7] .gopclntab        PROGBITS        0016de40 15de40 064f32 00   A  0   0 32"
+ },
+ "go-04": {
+  "cwd": "~/ctf/gogogo",
+  "out": "0x00119908 0x00119918 main.PCCKsmOSrmbDMUGqoFINVL\n0x00119918 0x0011992c main.quKuchsVvIEUGZDKOxl\n0x0011992c 0x001199ac main.FWPmCP\n0x001199ac 0x00119a58 main.addBase64Padding\n0x00119a58 0x00119ae0 main.removeBase64Padding\n0x00119ae0 0x00119c1c main.Pad\n0x00119c1c 0x00119ec0 main.encrypt\n0x00119ec0 0x0011a4d8 main.main\n0x0011a4d8 0x0011a5bc main.init"
+ },
+ "go-05": {
+  "cwd": "~/ctf/gogogo",
+  "out": "0x00082efc 0x00082f80 crypto/cipher.NewCFBDecrypter\n0x0008e980 0x0008ea68 crypto/aes.NewCipher\n0x000d8828 0x000d8980 encoding/base64.(*Encoding).DecodeString\n0x000defa4 0x000df34c github.com/matishsiao/goInfo.GetInfo\n0x0010a3dc 0x0010a52c github.com/common-nighthawk/go-figure.NewFigure\n0x0010b478 0x0010b584 github.com/common-nighthawk/go-figure.figure.Print"
+ },
+ "go-06": {
+  "cwd": "~/ctf/gogogo",
+  "out": "1KH1hb001Y09olU1\n1KH1hb001Y09olU2\n1KH1hb001Y09olUo\nGoOS:%v,Kernel:%v,Core:%v,Platform:%v,OS:%v,Hostname:%v,CPUs:%v\nXa22SKeyAll1aadf1\ndwnoDlybPWZTYRdbFpit\nwD5qPxNCP5yKQaYC7MzpWTNmZRQctNbaDCoJqGDSBkNjzwqkSQ_F7F6FYhFyD4Ha\nwD5qPxNCP5yKQaYC7MzpWTNmZRQctNbaDCoJqGDSBkNjzwqkSQ_F7F6FYhFyD4Hk"
+ },
+ "go-07": {
+  "cwd": "~/ctf/gogogo",
+  "out": "codigo de salida: 0"
+ },
+ "go-08": {
+  "cwd": "~/ctf/gogogo",
+  "out": "392 main_main.txt\n0x119ed8: jal      0x6e6a8  ; -> runtime.morestack_noctxt\n0x119ef0: jal      0xdefa4  ; -> github.com/matishsiao/goInfo.GetInfo\n0x119f14: addiu    $v0, $v0, 0x13cc  ; 0x1513cc \"4.14.0<-chanArabicAugustBrahmiCarianChakmaCommon\"\n0x119f24: jal      0xc4df8  ; -> strings.Contains\n0x119f4c: addiu    $v1, $v1, 0x3534  ; 0x153534 \"1KH1hb001Y09olU21KH1hb001Y09olUo2384185791015625\"\n0x119f5c: jal      0x5ccb4  ; -> runtime.stringtoslicebyte\n0x119f84: addiu    $a0, $a0, 0x3524  ; 0x153524 \"1KH1hb001Y09olU11KH1hb001Y09olU21KH1hb001Y09olUo\"\n0x119f94: jal      0x5ccb4  ; -> runtime.stringtoslicebyte\n0x119fc0: addiu    $a0, $a0, 0x3544  ; 0x153544 \"1KH1hb001Y09olUo23841857910156255lineoblique.flf\"\n0x119fd0: jal      0x5ccb4  ; -> runtime.stringtoslicebyte\n0x119ff0: jal      0x8e980  ; -> crypto/aes.NewCipher\n0x11a03c: jal      0x49588  ; -> runtime.newproc\n0x11a048: addiu    $at, $at, -0x634f  ; 0x159cb1 \"wD5qPxNCP5yKQaYC7MzpWTNmZRQctNbaDCoJqGDSBkNjzwqk\"\n0x11a058: jal      0x1199ac  ; -> main.addBase64Padding\n0x11a07c: jal      0xd8828  ; -> encoding/base64.(*Encoding).DecodeString\n0x11a0ec: jal      0x82efc  ; -> crypto/cipher.NewCFBDecrypter\n0x11a14c: jalr     $at\n0x11a1e8: addiu    $at, $at, 0x1289  ; 0x151289 \"linuxlo   open panicpc   pipe2r0   r1   r10  r11\"\n0x11a1f8: jal      0xc4df8  ; -> strings.Contains\n0x11a22c: jal      0x5cb20  ; -> runtime.slicebytetostring\n0x11a254: jal      0x10a3dc  ; -> github.com/common-nighthawk/go-figure.NewFigure\n0x11a2ac: jal      0x10b478  ; -> github.com/common-nighthawk/go-figure.figure.Print\n0x11a2c0: jal      0xbb370  ; -> fmt.Println\n0x11a2f4: addiu    $at, $at, -0x638f  ; 0x159c71 \"wD5qPxNCP5yKQaYC7MzpWTNmZRQctNbaDCoJqGDSBkNjzwqk\"\n0x11a318: jal      0x49588  ; -> runtime.newproc\n0x11a328: jal      0xdea80  ; -> github.com/matishsiao/goInfo.(*GoInfoObject).VarDump\n0x11a34c: jal      0x49588  ; -> runtime.newproc\n0x11a3ac: addiu    $at, $at, -0x638f  ; 0x159c71 \"wD5qPxNCP5yKQaYC7MzpWTNmZRQctNbaDCoJqGDSBkNjzwqk\"\n0x11a3d0: jal      0x49588  ; -> runtime.newproc\n0x11a3fc: addiu    $at, $at, 0x3a45  ; 0x153a45 \"Xa22SKeyAll1aadf1bad TinySizeClasscorrupt zip fi\"\n0x11a420: jal      0x49588  ; -> runtime.newproc\n0x11a444: jal      0x49588  ; -> runtime.newproc\n0x11a470: jal      0x49588  ; -> runtime.newproc\n0x11a4a8: jal      0x3c6bc  ; -> runtime.panicslice\n0x11a4b4: jal      0x3c640  ; -> runtime.panicindex\n0x11a4c0: jal      0x3c6bc  ; -> runtime.panicslice\n0x11a4cc: jal      0x3c6bc  ; -> runtime.panicslice"
+ },
+ "go-09": {
+  "cwd": "~/ctf/gogogo",
+  "out": "0x119ef0: jal      0xdefa4  ; -> github.com/matishsiao/goInfo.GetInfo\n0x119ef4: nop      \n0x119ef8: lw       $at, 4($sp)\n0x119efc: sw       $at, 0xcc($sp)\n0x119f00: lw       $v0, 0x10($at)\n0x119f04: lw       $v1, 0x14($at)\n0x119f08: sw       $v0, 4($sp)\n0x119f0c: sw       $v1, 8($sp)\n0x119f10: lui      $v0, 0x15\n0x119f14: addiu    $v0, $v0, 0x13cc  ; 0x1513cc \"4.14.0<-chanArabicAugustBrahmiCarianChakmaCommon\"\n0x119f18: sw       $v0, 0xc($sp)\n0x119f1c: addiu    $v0, $zero, 6\n0x119f20: sw       $v0, 0x10($sp)\n0x119f24: jal      0xc4df8  ; -> strings.Contains\n0x119f28: nop      \n0x119f2c: lbu      $at, 0x14($sp)\n0x119f30: beqz     $at, 0x11a498\n0x119f34: nop      "
+ },
+ "go-10": {
+  "cwd": "~/ctf/gogogo",
+  "out": "0x119fb4: addiu    $a0, $sp, 0x94\n0x119fb8: sw       $a0, 4($sp)\n0x119fbc: lui      $a0, 0x15\n0x119fc0: addiu    $a0, $a0, 0x3544  ; 0x153544 \"1KH1hb001Y09olUo23841857910156255lineoblique.flf\"\n0x119fc4: sw       $a0, 8($sp)\n0x119fc8: addiu    $a0, $zero, 0x10\n0x119fcc: sw       $a0, 0xc($sp)\n0x119fd0: jal      0x5ccb4  ; -> runtime.stringtoslicebyte\n0x119fd4: nop      \n0x119fd8: lw       $at, 0x14($sp)\n0x119fdc: lw       $v0, 0x10($sp)\n0x119fe0: lw       $v1, 0x18($sp)\n0x119fe4: sw       $v0, 4($sp)\n0x119fe8: sw       $at, 8($sp)\n0x119fec: sw       $v1, 0xc($sp)\n0x119ff0: jal      0x8e980  ; -> crypto/aes.NewCipher\n0x119ff4: nop      \n0x119ff8: lw       $at, 0x10($sp)\n0x119ffc: lw       $v0, 0x14($sp)\n0x11a000: lw       $v1, 0x18($sp)\n0x11a004: bnez     $v1, 0x11a488\n0x11a008: nop      "
+ },
+ "go-11": {
+  "cwd": "~/ctf/gogogo",
+  "out": "0x11a154: lw       $at, 0x70($sp)\n0x11a158: xori     $v0, $at, 2\n0x11a15c: beqz     $v0, 0x11a3e0\n0x11a160: nop      \n0x11a164: xori     $v0, $at, 8\n0x11a168: beqz     $v0, 0x11a390\n0x11a16c: nop      \n0x11a170: xori     $at, $at, 3\n0x11a174: bnez     $at, 0x11a2c8\n0x11a178: nop      "
+ },
+ "go-12": {
+  "cwd": "~/ctf/gogogo",
+  "out": "1KH1hb001Y09olUo -> b'Flag: RobPike2009' (PKCS7 OK)\n1KH1hb001Y09olU1 -> b'\\xd87tw\\xc3\\xa6Z\\xa4\\xa1\\x8e\\xcfN\\xfbH\\\\\\xc2+\\xec\\x16V\\x86h)]\\xb9\\xd8\\xcet\\x84\\xf0\\x8a\\x93' \n1KH1hb001Y09olU2 -> b'\\xc1\\xa5=Y\\x07\\xe0tE\\xde\\t\\x81ql\\xc28\\xf4\\x8a\\xbbHeS\\xe1\\x97/\\xfd\\xa35\\xf6\\x89\\xc6\"\\xd1' "
+ },
+ "go-13": {
+  "cwd": "~/ctf/gogogo",
+  "out": "f389c15c0ea41f12e53806fba659e2fb  -"
+ },
+ "horcrux-01": {
+  "cwd": "~",
+  "out": "130decf0165501e8e53148035b057bd5  evidencias.7z"
+ },
+ "horcrux-02": {
+  "cwd": "~/ctf/horcrux",
+  "out": "2019-12-06 21:29:00 ....A        11264               Windows/write.exe\n------------------- ----- ------------ ------------  ------------------------\n2022-03-02 14:39:45         2610779217    869868174  17550 files, 2120 folders"
+ },
+ "horcrux-03": {
+  "cwd": "~/ctf/horcrux",
+  "out": "Folders: 2120\nFiles: 17550\nSize:       2610779217\nCompressed: 870091187\n$AttrDef\n$BadClus\n$Bitmap\n$Boot\n$I30\n$LogFile\n$MFT\n$MFTMirr\n$Secure\nUsers\nWindows"
+ },
+ "horcrux-04": {
+  "cwd": "~/ctf/horcrux",
+  "out": "evid/Users/Gregor:\n$I30\n$TXF_DATA\n3D Objects\nAppData\nConfiguración local\nContacts\nCookies\nDatos de programa\nEntorno de red\nImpresoras\nMenú Inicio\nMis documentos\nNTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TM.blf\nNTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TMContainer00000000000000000001.regtrans-ms\nNTUSER.DAT{53b39e88-18c4-11ea-a811-000d3aa4692b}.TMContainer00000000000000000002.regtrans-ms\nOneDrive\nPlantillas\nReciente\nSearches\nSendTo\nntuser.dat.LOG1\nntuser.dat.LOG2\nntuser.ini\n\nevid/Windows/System32/sru:\n$I30\nSRU.chk\nSRU.log\nSRU00017.log\n288\n151"
+ },
+ "horcrux-05": {
+  "cwd": "~/ctf/horcrux",
+  "out": "BYTECODEGENERATOR.EXE-C1E9BCE6.pf\nFODHELPER.EXE-8ECD01E5.pf\nFTK IMAGER.EXE-1B23CEFA.pf\nFTK.EXE-0DC36F5E.pf\nFTK.EXE-9D1677E8.pf\nFTKEXE~2.PF.copy0\nFTKIMA~1.PF.copy0\nHXD.EXE-1E343919.pf\nINJECT.EXE-0732FB73.pf\nPACKED.TMP-461CF410.pf\nPACKED.TMP-952A2D31.pf\nRUNAS.EXE-D9FE023F.pf\nSC.EXE-945D79AE.pf\nTASKKILL.EXE-8F5B2253.pf\nTOR.EXE-A3D112C0.pf\nVMPROTECT.EXE-ADABE41F.pf\nWEVTUTIL.EXE-EF5861C4.pf"
+ },
+ "horcrux-06": {
+  "cwd": "~/ctf/horcrux",
+  "out": "Dec 20, 2021 12:44:37.086364500 UTC | 1 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\TEMP\\IS-KCM6S.TMP\\WINSCP-5.19.5-SETUP.TMP\nDec 20, 2021 12:44:52.324464900 UTC | 2 | \\USERS\\GREGOR\\DOWNLOADS\\WINSCP-5.19.5-SETUP.EXE\nDec 20, 2021 12:44:53.286938500 UTC | 1 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\TEMP\\IS-IFTT6.TMP\\WINSCP-5.19.5-SETUP.TMP\nDec 20, 2021 12:51:10.594780300 UTC | 1 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\MICROSOFT\\UNINSTALL.EXE\nDec 20, 2021 12:51:29.828081500 UTC | 1 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\TEMP\\IS-O1ALB.TMP\\PACKED.TMP\nDec 20, 2021 12:51:34.002681800 UTC | 1 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\TEMP\\IS-OO94O.TMP\\PACKED.TMP\nDec 20, 2021 12:51:45.065401800 UTC | 1 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\TEMP\\IS-1M2PV.TMP\\_ISETUP\\_SETUP64.TMP\nDec 20, 2021 12:52:26.034224700 UTC | 1 | \\USERS\\GREGOR\\DOWNLOADS\\INJECT.EXE\nDec 20, 2021 15:03:39.093624600 UTC | 3 | \\USERS\\GREGOR\\APPDATA\\RUNAS.EXE\nDec 20, 2021 15:04:43.336057700 UTC | 2 | \\USERS\\GREGOR\\DOWNLOADS\\VBOXWINDOWSADDITIONS.EXE\nDec 20, 2021 15:06:51.370483000 UTC | 3 | \\USERS\\GREGOR\\DESKTOP\\HXD.EXE\nDec 20, 2021 15:07:16.221198800 UTC | 2 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\TEMP\\TOR.EXE\nDec 20, 2021 15:09:46.011103300 UTC | 1 | \\USERS\\GREGOR\\APPDATA\\LOCAL\\TEMP\\{FDE8EF61-1621-48DC-AEEC-A1146422445B}\\FTK.EXE"
+ },
+ "horcrux-07": {
+  "cwd": "~/ctf/horcrux",
+  "out": "\tExecutable filename\t\t: RUNAS.EXE\n\tRun count\t\t\t: 3\n\tLast run time: 1\t\t: Dec 20, 2021 15:03:39.093624600 UTC\n\tLast run time: 2\t\t: Dec 20, 2021 13:08:50.526311900 UTC\n\tLast run time: 3\t\t: Dec 20, 2021 12:56:21.700668800 UTC\n\n\tExecutable filename\t\t: TOR.EXE\n\tRun count\t\t\t: 2\n\tLast run time: 1\t\t: Dec 20, 2021 15:07:16.221198800 UTC\n\tLast run time: 2\t\t: Dec 20, 2021 13:09:01.761015400 UTC\n\tLast run time: 3\t\t: Not set (0)\n\n\tExecutable filename\t\t: WEVTUTIL.EXE\n\tRun count\t\t\t: 12\n\tLast run time: 1\t\t: Dec 20, 2021 13:12:15.125620300 UTC\n\tLast run time: 2\t\t: Dec 20, 2021 13:12:15.053536300 UTC\n\tLast run time: 3\t\t: Dec 20, 2021 13:12:14.962758000 UTC\n\n\tExecutable filename\t\t: INJECT.EXE\n\tRun count\t\t\t: 1\n\tLast run time: 1\t\t: Dec 20, 2021 12:52:26.034224700 UTC\n\tLast run time: 2\t\t: Not set (0)\n\tLast run time: 3\t\t: Not set (0)"
+ },
+ "horcrux-08": {
+  "cwd": "~/ctf/horcrux",
+  "out": "17de00205b7f464d70f8ecef14d7d1609b365fb2\t56019336\taccessdata\tinstallshield setup.exe\tc:\\users\\gregor\\desktop\\ftk.exe\n409aea9461d03bff3e006d3e7e7c4790a0862170\t15360\tmicrosoft\thttpd.exe\tc:\\users\\gregor\\appdata\\roaming\\microsoft\\windows\\httpd.exe\nf510721eb2e4ba451f73d0d3f96afae6a33cbbb0\t6763520\tmaël hörz\thxd.exe\tc:\\users\\gregor\\desktop\\hxd.exe\nde275b64985009d335ab85b38d26a3026739a68a\t226304\t\t\tc:\\users\\gregor\\downloads\\inject.exe\n8e9b885a5544972d56a9e730b277b4df54832a65\t76933800\tvmprotect software                                          \t\tc:\\users\\gregor\\appdata\\local\\microsoft\\packed.exe\n4aa4b498ae037a2b0479659374a5c3af5f6b8d97\t358784\tsysinternals - www.sysinternals.com\tsdelete.exe\tc:\\users\\gregor\\appdata\\runas.exe\n99e107ca419959385ca57241fb6ed3796eaacc9e\t231936\t\t\tc:\\users\\gregor\\appdata\\local\\temp\\tor.exe\nb80a51f46b601e178180a70fa548bce4f62fea95\t86528\tbytepointer.com\tpelook.exe\tc:\\users\\gregor\\appdata\\local\\microsoft\\uninstall.exe\ndb4ddce85f18f671d9aff6832a599f2483581c26\t270840\toracle corporation\tvboxwindowsadditions.exe\tc:\\users\\gregor\\downloads\\vboxwindowsadditions.exe\nd35b0bcb01d0a10b0bb814e7b771bab77b99944a\t11846088\tmartin prikryl                                              \twinscp-5.19.5-setup.exe                           \tc:\\users\\gregor\\downloads\\winscp-5.19.5-setup.exe"
+ },
+ "horcrux-09": {
+  "cwd": "~/ctf/horcrux",
+  "out": "=== EventID 1116  2021-12-20 13:08:04.212959\n   Threat Name: Trojan:Win32/Sabsik.TE.A!ml\n   Path: file:_C:\\Users\\Public\\Downloads\\inject.exe\n   Action Name: %%887\n=== EventID 1117  2021-12-20 13:09:13.680716\n   Threat Name: Trojan:Win32/Sabsik.TE.A!ml\n   Path: file:_C:\\Users\\Public\\Downloads\\inject.exe\n   Action Name: %%809\n=== EventID 1116  2021-12-20 15:04:02.248278\n   Threat Name: Trojan:Win32/Sabsik.TE.A!ml\n   Path: file:_C:\\Users\\Gregor\\Downloads\\inject.exe\n   Type Name: FastPath\n   Action Name: No aplicable\n=== EventID 1117  2021-12-20 15:04:40.438679\n   Threat Name: Trojan:Win32/Sabsik.TE.A!ml\n   Path: file:_C:\\Users\\Gregor\\Downloads\\inject.exe\n   Type Name: FastPath\n   Action Name: Cuarentena"
+ },
+ "horcrux-10": {
+  "cwd": "~/ctf/horcrux",
+  "out": "=== EventID 26  2021-12-20 12:52:26.356272\n   Caption: inject.exe - Error del sistema\n   Message: La ejecuci&#243;n de c&#243;digo no puede continuar porque no se encontr&#243; MSVCP140.dll. Este problema se puede solucionar reinstalando el programa. \n=== EventID 26  2021-12-20 12:52:26.389742\n   Caption: inject.exe - Error del sistema\n   Message: La ejecuci&#243;n de c&#243;digo no puede continuar porque no se encontr&#243; VCRUNTIME140.dll. Este problema se puede solucionar reinstalando el programa. \n=== EventID 26  2021-12-20 12:52:26.422010\n   Caption: inject.exe - Error del sistema\n   Message: La ejecuci&#243;n de c&#243;digo no puede continuar porque no se encontr&#243; VCRUNTIME140_1.dll. Este problema se puede solucionar reinstalando el programa. "
+ },
+ "horcrux-11": {
+  "cwd": "~/ctf/horcrux",
+  "out": "Application.evtx                                 407 eventos   2021-12-15 11:13:10  ->  2021-12-20 13:02:02\nSecurity.evtx                                   1861 eventos   2021-12-15 11:12:50  ->  2021-12-20 13:01:08\nSystem.evtx                                      627 eventos   2021-12-15 11:12:48  ->  2021-12-20 13:01:10\nMicrosoft-Windows-Windows Defender%4Operational.evtx     55 eventos   2021-12-15 11:13:18  ->  2021-12-20 15:30:43"
+ },
+ "horcrux-12": {
+  "cwd": "~/ctf/horcrux",
+  "out": "Exporting table 15 ({D10CA2FE-6FCF-4F6D-848E-B2E99266FA86}) out of 15.\nExport completed."
+ },
+ "horcrux-13": {
+  "cwd": "~/ctf/horcrux",
+  "out": "Dec 20, 2021 15:53:00.000000051\tsent=800\trecv=1214\t\\device\\harddiskvolume2\\users\\gregor\\appdata\\roaming\\microsoft\\windows\\httpd.exe"
+ },
+ "horcrux-14": {
+  "cwd": "~/ctf/horcrux",
+  "out": "=== Registro MFT #1521  (EN USO DIR)\n  $SI  creado=2019-12-07 09:14:52.220959 modificado=2021-12-20 15:11:36.215079 mft_mod=2021-12-20 15:11:36.215079 acceso=2021-12-20 15:11:36.215079\n  $FN  nombre=ReportArchive  ruta=\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\n       creado=2021-12-15 11:06:21.129419 modificado=2021-12-15 11:06:21.129419\n\n=== Registro MFT #111015  (EN USO DIR)\n  $SI  creado=2021-12-20 13:09:30.964169 modificado=2021-12-20 13:09:31.026581 mft_mod=2021-12-20 13:09:31.026581 acceso=2021-12-20 15:05:40.220976\n  $FN  nombre=2021-1~1.964  ruta=\\Users\\Gregor\\AppData\\Local\\Temp\\VirtualBox Dropped Files\\2021-1~1.964\n       creado=2021-12-20 13:09:30.964169 modificado=2021-12-20 13:09:30.964169\n  $FN  nombre=2021-12-20T13_09_30.964169800Z  ruta=\\Users\\Gregor\\AppData\\Local\\Temp\\VirtualBox Dropped Files\\2021-12-20T13_09_30.964169800Z\n       creado=2021-12-20 13:09:30.964169 modificado=2021-12-20 13:09:30.964169\n\n=== Registro MFT #111027  (EN USO DIR)\n  $SI  creado=2021-12-20 13:10:39.652452 modificado=2021-12-20 13:10:39.675064 mft_mod=2021-12-20 13:10:39.675064 acceso=2021-12-20 15:11:36.215079\n  $FN  nombre=APPCRA~1.EXE  ruta=\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\APPCRA~1.EXE\n       creado=2021-12-20 13:10:39.652452 modificado=2021-12-20 13:10:39.652452\n  $FN  nombre=AppCrash_httpd.exe_61d75d8da28e96822edcf0965c1faaab43d89_d06d61e9_7f8f696d-c11c-4984-b9f9-6198229217e4  ruta=\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_httpd.exe_61d75d8da28e96822edcf0965c1faaab43d89_d06d61e9_7f8f696d-c11c-4984-b9f9-6198229217e4\n       creado=2021-12-20 13:10:39.652452 modificado=2021-12-20 13:10:39.652452\n\n=== Registro MFT #111050  (EN USO DIR)\n  $SI  creado=2021-12-20 13:11:57.802886 modificado=2021-12-20 13:11:57.815541 mft_mod=2021-12-20 13:11:57.815541 acceso=2021-12-20 15:11:36.215079\n  $FN  nombre=APPCRA~2.EXE  ruta=\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\APPCRA~2.EXE\n       creado=2021-12-20 13:11:57.802886 modificado=2021-12-20 13:11:57.802886\n  $FN  nombre=AppCrash_httpd.exe_61d75d8da28e96822edcf0965c1faaab43d89_d06d61e9_6f737479-2688-4278-b208-67af5a7f0c01  ruta=\\ProgramData\\Microsoft\\Windows\\WER\\ReportArchive\\AppCrash_httpd.exe_61d75d8da28e96822edcf0965c1faaab43d89_d06d61e9_6f737479-2688-4278-b208-67af5a7f0c01\n       creado=2021-12-20 13:11:57.802886 modificado=2021-12-20 13:11:57.802886"
+ },
+ "horcrux-15": {
+  "cwd": "~/ctf/horcrux",
+  "out": "C:\\Users\\Gregor\\AppData\\Roaming\\Microsoft\\Windows\\httpd.exe"
+ },
+ "horcrux-16": {
+  "cwd": "~/ctf/horcrux",
+  "out": "0"
+ },
+ "horcrux-17": {
+  "cwd": "~/ctf/horcrux",
+  "out": "Machine          : 0x14c  (x86)\nTimeDateStamp    : 2020-09-12 23:38:04 UTC\ne_lfanew         : 0xd0\nNumberOfSections : 4\nImageBase        : 0x400000\nEntryPoint (RVA) : 0xf393\nSizeOfImage      : 0x18000  (0.1 MB)\nSubsystem        : 3\nDataDirectories  : 16\nFirma Authenticode: no\n\nSecciones:\n  .text    VA=0x1000    VSize=0xf4e0    Raw=0xf600   entropía=6.48\n  .rdata   VA=0x11000   VSize=0x4fd6    Raw=0x5000   entropía=5.47\n  .data    VA=0x16000   VSize=0x190     Raw=0x200    entropía=2.69\n  .rsrc    VA=0x17000   VSize=0x5b8     Raw=0x600    entropía=4.51\n\nRecursos de versión:\n  ProductName        = PE Look (pelook)\n  OriginalFilename   = pelook.exe\n  FileVersion        = 1.73 build 2009120\n  ProductVersion     = 1.73 build 2009120\n  FileDescription    = PE/COFF dump and conversion tool\n  CompanyName        = bytepointer.com\n  LegalCopyright     = copyright (c) bytepointer.com 2016-2020\n  Comments           = freeware\n\nImports:\n  VERSION.dll: 3 funciones -> GetFileVersionInfoA, GetFileVersionInfoSizeA, VerQueryValueA\n  KERNEL32.dll: 40 funciones -> DeleteCriticalSection, GetLastError, GetModuleFileNameA, VerLanguageNameA, RtlUnwind, LeaveCriticalSection, HeapAlloc, GetProcessHeap ...\n  imagehlp.dll: 1 funciones -> MapFileAndCheckSumA\n  USER32.dll: 1 funciones -> MessageBoxA"
+ }
+}

@@ -32,3 +32,15 @@ Cada paso tiene una caja naranja "Captura pendiente" con un nombre, por ejemplo 
 ## Copiar comandos desde el PDF
 
 Los comandos largos están partidos con `\` al final de la línea. Es la continuación estándar de bash y zsh: puedes copiar y pegar el bloque entero, se ejecuta como un solo comando.
+
+## Generador (opcional)
+
+`generador/` contiene lo que produce `informe_retos.tex`:
+
+- `steps.py`: cada paso, con su comando exacto, explicación y nombre de captura.
+- `textos.py`: el texto fijo del informe.
+- `salidas.json`: la salida real de cada comando, ejecutado en zsh.
+- `build_tex.py`: genera el `.tex`.
+- `verificar_pdf.py`: comprueba que todos los comandos se copian del PDF sin alteraciones.
+
+`run_replica.py` y `build_tex.py` usan rutas del entorno donde se generó el informe. Para pequeños cambios de texto es más sencillo editar directamente `informe_retos.tex`.
