@@ -12,7 +12,7 @@ CCN-Cry ya fue validado en la plataforma con este criterio.
 | Reversing: The Kraken | ★★ | `Kongespeilet1250` | `flag{d11c2e023a6a0fb3105121dade32232b}` | ✅ verificado (terminador `\0` exacto) |
 | Reversing: Spear Phishing… | ★ | `CVE-2017-0199` | `flag{93b146d21d3bdc8635836f8a11ba62b9}` | ✅ verificado con `rtfobj` |
 | Reversing: Go go go! | ★★★ | `RobPike2009` | `flag{f389c15c0ea41f12e53806fba659e2fb}` | ✅ verificado (padding PKCS#7 válido) |
-| H0rr0crux | ★ | `httpd.exe` — SHA1 `409aea9461d03bff3e006d3e7e7c4790a0862170` | `flag{<MD5 de httpd.exe>}` | ⏳ falta pivotar el SHA1 → MD5 (ver sección 5) |
+| H0rr0crux | ★ | `httpd.exe` (Cobalt Strike) — MD5 del binario | `flag{dbe0e10775e35a58e8ff463ccbe5f7d8}` | ✅ SRUM + Amcache + VirusTotal (61 detecciones) |
 
 Hashes de los ficheros recibidos (todos coinciden con los del enunciado):
 
@@ -322,7 +322,7 @@ echo -n "RobPike2009" | md5sum
 
 ---
 
-## 5. H0rr0crux ⏳ (binario identificado, falta el MD5)
+## 5. H0rr0crux ✅
 
 **Enunciado:** el SOC detectó conexiones sospechosas relacionadas con el malware **Gozi**. El
 equipo fue **restaurado** tras recoger evidencias. Objetivo: `flag{<md5_binario>}` del binario
@@ -361,22 +361,48 @@ SRUM y logs del registro. Era una VM VirtualBox.
 | `AppData\runas.exe` | **SDelete** de Sysinternals renombrado (`OriginalFileName=sdelete.exe`) | Herramienta **antiforense**: borró el malware de forma irrecuperable |
 | `AppData\Local\Microsoft\uninstall.exe` | **PE Look** (`pelook.exe`, bytepointer.com) renombrado | Visor de PE, sin funciones de red. Es el único que sigue en la evidencia |
 | `packed.exe` / `PACKED.TMP` | Instalador de **VMProtect Demo** | Herramienta para empaquetar/proteger binarios |
-| `Temp\tor.exe` | 231 KB, sin metadatos (el Tor real pesa varios MB) | Sospechoso, pero **SRUM no le atribuye tráfico de red** |
-| **`AppData\Roaming\Microsoft\Windows\httpd.exe`** | 15.360 bytes, PE32, **se hace pasar por Microsoft** (`ProductName = Microsoft Operating System`, versión `1.0.0.0`, compilado el 09/06/2020) | ✅ **Es el único binario sospechoso con tráfico de red en SRUM** |
+| `Temp\tor.exe` | 231 KB, sin metadatos. VirusTotal: en realidad es **`tag_converter.exe`**, 3/70 detecciones, sin familia | Programa casi inocuo renombrado como Tor. **SRUM no le atribuye tráfico de red** |
+| **`AppData\Roaming\Microsoft\Windows\httpd.exe`** | 15.360 bytes, PE32, **se hace pasar por Microsoft** (`ProductName = Microsoft Operating System`, versión `1.0.0.0`, compilado el 09/06/2020). VirusTotal: **Cobalt Strike**, 61 detecciones | ✅ **Es el único binario sospechoso con tráfico de red en SRUM** |
 
 ### Respuesta
 
 - **Binario:** `C:\Users\Gregor\AppData\Roaming\Microsoft\Windows\httpd.exe`
 - **SHA1 (Amcache):** `409aea9461d03bff3e006d3e7e7c4790a0862170`
-- **MD5:** el fichero se borró con SDelete y no está en la evidencia: no hay registro en la
-  `$MFT` ni coincidencias por hash o tamaño en los 17.548 ficheros. Hay que pivotar el SHA1 en
-  threat intel. Desde la nube no se pudo, porque la red del entorno bloquea VirusTotal y
-  MalwareBazaar y ambas piden clave de API.
-  → Abrir **https://www.virustotal.com/gui/file/409aea9461d03bff3e006d3e7e7c4790a0862170**,
-  pestaña *Details* → *MD5*. Confirmar en las detecciones que la familia es Gozi/Ursnif/ISFB.
-  Flag: `flag{<ese MD5>}`.
-- Si VirusTotal no lo tuviera, el plan B es `tor.exe`, con SHA1
-  `99e107ca419959385ca57241fb6ed3796eaacc9e`.
+- **MD5 (VirusTotal):** `dbe0e10775e35a58e8ff463ccbe5f7d8`
+- **Flag:** `flag{dbe0e10775e35a58e8ff463ccbe5f7d8}`
+
+El fichero se borró con SDelete y no está en la evidencia: no hay registro en la `$MFT` ni
+coincidencias por hash o tamaño en los 17.548 ficheros. Por eso el MD5 sale de pivotar el
+SHA1 de Amcache en VirusTotal.
+
+Resultado de VirusTotal para los tres candidatos:
+
+| Binario | SHA1 (Amcache) | MD5 (VirusTotal) | Nombre real | Familia | Detecciones |
+|---|---|---|---|---|---|
+| **`httpd.exe`** | `409aea94…0862170` | **`dbe0e10775e35a58e8ff463ccbe5f7d8`** | `httpd.exe` | **`trojan.cobaltstrike/fugrafa`** | **61** |
+| `tor.exe` | `99e107ca…eaacc9e` | `3e6f1f16a4cbbf7c5a5c077ab197bb50` | `tag_converter.exe` | — | 3 |
+| `inject.exe` | `de275b64…739a68a` | — (no está en VirusTotal) | — | — | — |
+
+**Por qué la familia no es Gozi y aun así es la respuesta:** el enunciado dice que las
+conexiones "*podrían* estar relacionadas con Gozi". Es una hipótesis del SOC, no un hecho. Lo
+que piden es "el binario dañino **responsable de las conexiones**", y las evidencias lo señalan
+sin ambigüedad: SRUM le atribuye tráfico de red, es el único de los tres que es malware
+confirmado y además se disfraza de Microsoft. Las intrusiones de Gozi/Ursnif suelen terminar
+desplegando **Cobalt Strike** como segunda fase, así que la sospecha inicial tiene sentido.
+
+Consulta en Kali (necesita una clave de API gratuita de VirusTotal):
+
+```bash
+sudo apt install -y jq
+```
+
+```bash
+VT_KEY="TU_API_KEY"
+```
+
+```bash
+for h in 409aea9461d03bff3e006d3e7e7c4790a0862170 99e107ca419959385ca57241fb6ed3796eaacc9e de275b64985009d335ab85b38d26a3026739a68a; do echo "== $h"; curl -s -H "x-apikey: $VT_KEY" https://www.virustotal.com/api/v3/files/$h | jq -r '.data.attributes | "MD5: \(.md5)\nNombre: \(.meaningful_name)\nFamilia: \(.popular_threat_classification.suggested_threat_label)\nDetecciones: \(.last_analysis_stats.malicious)"'; sleep 16; done
+```
 
 ### Comandos
 
@@ -447,10 +473,18 @@ find . -type f -print0 | xargs -0 sha1sum | grep -i 409aea9461d03bff3e006d3e7e7c
   identificarlo, igual que hay que localizar todos los Horrocruxes.
 - **Gozi (Ursnif / ISFB / Dreambot):** troyano bancario de 2007, uno de los más longevos. Su
   código fuente se filtró en 2010 y en 2015, lo que generó decenas de variantes. Algunas usan
-  **Tor** para el C2. Suele persistir en `%APPDATA%\Microsoft\…` con nombres que imitan software
-  legítimo, como este `httpd.exe` con metadatos falsos de Microsoft.
+  **Tor** para el C2, y de ahí que el señuelo se llame `tor.exe`. En intrusiones reales Gozi
+  actúa a menudo como *initial access* y después despliega **Cobalt Strike**.
+- **Cobalt Strike:** plataforma comercial de *red team* (Raphael Mudge, 2012) cuyo agente se
+  llama **Beacon**. Es de las herramientas más usadas por atacantes reales gracias a versiones
+  crackeadas. Sus *stagers* `.exe` pesan unos 14–15 KB, como este `httpd.exe`. **Fugrafa** es el
+  nombre genérico que dan algunos antivirus a binarios de este tipo.
+- **Nombre `httpd.exe`:** imita al servidor web Apache (`httpd` = HTTP daemon). Un proceso
+  llamado así haciendo tráfico HTTP no llama la atención. Además lleva metadatos falsos de
+  Microsoft.
 - Técnicas observadas (MITRE ATT&CK):
-  - T1036 *Masquerading*: `httpd.exe` falsamente firmado como Microsoft, SDelete como `runas.exe`.
+  - T1036 *Masquerading*: `httpd.exe` falsamente firmado como Microsoft, SDelete como `runas.exe`
+    y `tag_converter.exe` como `tor.exe`.
   - T1070.001 *Clear Windows Event Logs*: `wevtutil`.
   - T1070.004 *File Deletion*: SDelete.
   - T1027.002 *Software Packing*: VMProtect.
