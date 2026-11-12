@@ -10,7 +10,8 @@ CCN-Cry ya fue validado en la plataforma con este criterio.
 |---|---|---|---|---|
 | Reversing: CCN-Cry | ★★ | `JosephPopp1989` | `flag{c890082bbb38d2aad5eb182cac9fbc7e}` | ✅ validado en la plataforma |
 | Reversing: The Kraken | ★★ | `Kongespeilet1250` | `flag{d11c2e023a6a0fb3105121dade32232b}` | ✅ verificado (terminador `\0` exacto) |
-| Reversing: Spear Phishing… | ★ | `CVE-2017-0199` | `flag{93b146d21d3bdc8635836f8a11ba62b9}` | ✅ verificado con `rtfobj` |
+| Reversing: Spear Phishing… | ★ | `CVE-2017-0199` | `flag{93b146d21d3bdc8635836f8a11ba62b9}` | ✅ validado en la plataforma |
+| Reversing: Spear Phishing… Part 2 | ★ | `http://dagobah.local/logo.doc` | `flag{fb7534ecc904766563ad711331a11121}` | ✅ URL extraída del URL Moniker (mismo `.rar`) |
 | Reversing: Go go go! | ★★★ | `RobPike2009` | `flag{f389c15c0ea41f12e53806fba659e2fb}` | ✅ verificado (padding PKCS#7 válido) |
 | H0rr0crux | ★ | `httpd.exe` (Cobalt Strike) — MD5 del binario | `flag{dbe0e10775e35a58e8ff463ccbe5f7d8}` | ✅ SRUM + Amcache + VirusTotal (61 detecciones) |
 
@@ -244,6 +245,39 @@ grep -o 'objautlink\|objupdate\|OLE2Link\|4f4c45324c696e6b' Nominas.rtf | sort -
 ```bash
 echo -n "CVE-2017-0199" | md5sum
 ```
+
+### Part 2 — URL dañina
+
+Mismo `suspicious_.rar` (MD5 `6c51db1b0f92b7a8777c6822c2f9a8a5`). Se desbloquea al resolver la
+parte 1 y pide la URL dañina relacionada con el documento. Es la que guarda el URL Moniker del
+objeto `OLE2Link`, la que Word visita al abrir el RTF para descargar el HTA:
+**`http://dagobah.local/logo.doc`**.
+
+Extraer la URL exacta (`rtfobj` ya la muestra en "URL extracted"):
+
+```bash
+rtfobj Nominas.rtf | grep -i 'URL extracted'
+```
+
+Comprobarla byte a byte desde el objeto OLE, para descartar espacios o caracteres invisibles:
+
+```bash
+python3 -c "import re;d=open('Nominas.rtf').read();b=bytes.fromhex(re.sub(r'[^0-9a-f]','',d.split(r'{\*\objdata')[1].split('}')[0]));i=b.find(bytes.fromhex('e0c9ea79f9bace118c8200aa004ba90b'));n=int.from_bytes(b[i+16:i+20],'little');print(repr(b[i+20:i+20+n].decode('utf-16le').split(chr(0))[0]))"
+```
+
+```bash
+echo -n "http://dagobah.local/logo.doc" | md5sum
+```
+
+→ `fb7534ecc904766563ad711331a11121`
+
+Variantes por si la plataforma no aceptara la URL completa: `dagobah.local/logo.doc` →
+`39187b419652a52cb5bca8ed2d8952c7`; `dagobah.local` → `d19e4c1cde7f30c64aadd9b2aff5cf49`.
+
+Notas: el `.doc` es engañoso. En CVE-2017-0199 el servidor devuelve en realidad un **HTA**
+(`Content-Type: application/hta`) y Windows lo ejecuta con `mshta.exe`, aunque la extensión sea
+`.doc`. El dominio `.local` indica un servidor de la red interna (laboratorio o equipo ya
+comprometido), no uno de Internet.
 
 ### Contexto
 
