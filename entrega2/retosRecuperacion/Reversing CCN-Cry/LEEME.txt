@@ -1,0 +1,1 @@
+CCN-Cry no necesita scripts propios: se resuelve con tshark, objdump, strings y openssl.

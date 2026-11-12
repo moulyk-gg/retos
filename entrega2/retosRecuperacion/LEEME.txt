@@ -1,0 +1,7 @@
+1) Copia retos_scripts.zip en /home/kali/Downloads y ejecuta (como root):
+     cd /home/kali/Downloads && unzip -o retos_scripts.zip
+   Cada carpeta de reto recibe sus scripts. Los ficheros de los retos no se tocan.
+2) Instala todo lo necesario (una sola vez):
+     bash /home/kali/Downloads/retosRecuperacion/instalar.sh
+3) Sigue retos_analisis.pdf: cada reto empieza con un cd a su carpeta y los scripts se
+   ejecutan desde ahí (python3 script.py ...).

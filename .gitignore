@@ -10,3 +10,8 @@ entrega/*.log
 entrega/*.out
 entrega/*.toc
 entrega/*.listing
+entrega2/*.aux
+entrega2/*.log
+entrega2/*.out
+entrega2/*.toc
+entrega2/*.listing
