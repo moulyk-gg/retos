@@ -55,5 +55,6 @@ def decrypt(k: int) -> bytes:
 print("\n== Candidatos legibles según el byte bajo devuelto por [0x430000] ==")
 for k in range(256):
     p = decrypt(k)
-    if all(32 <= b < 127 for b in p):
-        print(f"  k={k:#04x} ({k:3d}): {p.decode()}")
+    # Texto imprimible terminado en byte nulo (cadena C que recibe OutputDebugStringA)
+    if p.endswith(b"\x00") and all(32 <= b < 127 for b in p[:-1]):
+        print(f"  k={k:#04x} ({k:3d}): {p[:-1].decode()!r} + '\\x00'")

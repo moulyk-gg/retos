@@ -6,6 +6,9 @@ Uso: python3 evtx_grep.py fichero.evtx [texto] [--ids 1116,1117]
 import re
 import sys
 
+import warnings
+warnings.filterwarnings("ignore", category=SyntaxWarning)  # avisos internos de python-evtx
+
 import Evtx.Evtx as evtx
 
 path = sys.argv[1]

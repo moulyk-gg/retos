@@ -1,5 +1,9 @@
 # Informe de retos CTF — Reversing y Forense
 
+> **Versión completa:** `informe/informe_retos.pdf`, con su fuente LaTeX `informe/informe_retos.tex`.
+> Incluye todos los pasos con sus comandos verificados en zsh, las salidas reales y los huecos para las capturas.
+> Este Markdown es el resumen inicial.
+
 Formato de flag de la plataforma: `flag{md5}`, donde el md5 se calcula sobre el **valor** de la
 flag, sin el prefijo `Flag: ` y sin salto de línea (`echo -n "valor" | md5sum`).
 CCN-Cry ya fue validado en la plataforma con este criterio.

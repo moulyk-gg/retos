@@ -1,0 +1,78 @@
+Guarda aquí cada captura con el nombre indicado (PNG). Al recompilar aparecen solas en el informe.
+
+prep-10.png	Verificar la integridad de la descarga
+prep-11.png	Extraer los retos
+prep-12.png	Estructura de los retos
+ccn-01.png	Preparar la carpeta del reto
+ccn-02.png	Verificar los MD5 contra el enunciado
+ccn-03.png	Ver el fichero cifrado
+ccn-04.png	Primera rareza: unzip no puede abrir el zip
+ccn-05.png	Método de cifrado del zip
+ccn-06.png	Extraer la evidencia
+ccn-07.png	Resumen de la captura
+ccn-08.png	Jerarquía de protocolos
+ccn-09.png	Conversaciones TCP
+ccn-10.png	Peticiones HTTP: descarga y "llamada a casa"
+ccn-11.png	Contenido completo de la petición al C2
+ccn-12.png	Exportar los objetos HTTP de la captura
+ccn-13.png	Extraer el ransomware
+ccn-14.png	Funciones importadas relevantes
+ccn-15.png	Cadenas interesantes
+ccn-16.png	Generación de clave (32) e IV (8)
+ccn-17.png	Función generadora: charset[rand() \% 78]
+ccn-18.png	Construcción de la cabecera: separadores ':' y salto de línea
+ccn-19.png	La trampa: longitud de clave fijada a 16 bytes
+ccn-20.png	Extraer clave e IV de la captura
+ccn-21.png	Descifrar con Blowfish-CBC
+ccn-22.png	Flag en MD5
+kraken-01.png	Preparar la carpeta y verificar el fichero
+kraken-02.png	Cabecera: MZ23PE
+kraken-03.png	Estructura PE
+kraken-04.png	Descompresor de Crinkler en el entry point
+kraken-05.png	Emular el descompresor con Unicorn (sin ejecutar el .exe)
+kraken-06.png	Resolver de imports por hash (PEB -> kernel32)
+kraken-07.png	Main: llamada a [0x430000] y array cifrado de 23 bytes
+kraken-08.png	Bucle de descifrado y salida por [0x430010]
+kraken-09.png	Lista de exports de kernel32 (Wine)
+kraken-10.png	Identificar APIs por hash y descifrar
+kraken-11.png	Flag en MD5
+spear-01.png	Preparar la carpeta y verificar el RAR
+spear-02.png	Listar el RAR
+spear-03.png	Extraer y verificar
+spear-04.png	Contenido del RTF: no tiene texto
+spear-05.png	Palabras de control y firmas clave
+spear-06.png	Decodificar la clase del objeto
+spear-07.png	Análisis con rtfobj (oletools)
+spear-08.png	Parte 2: URL exacta del URL Moniker
+spear-09.png	Flags en MD5
+go-01.png	Preparar la carpeta y extraer
+go-02.png	Tipo de binario
+go-03.png	Versión de Go y secciones
+go-04.png	Funciones del paquete main (desde .gopclntab)
+go-05.png	Librerías de terceros y crypto usadas
+go-06.png	Cadenas sospechosas
+go-07.png	Ejecución emulada: no imprime nada
+go-08.png	Desensamblar main.main (MIPS, Capstone)
+go-09.png	Condición 1: kernel que contenga 4.14.0
+go-10.png	Clave real (la tercera) y llamada a aes.NewCipher
+go-11.png	Condición 2: número de CPUs (switch 2 / 8 / 3)
+go-12.png	Descifrar AES-128-CFB con las tres claves
+go-13.png	Flag en MD5
+horcrux-01.png	Preparar la carpeta y verificar la evidencia
+horcrux-02.png	Contenido del 7z
+horcrux-03.png	Extraer (tarda unos minutos)
+horcrux-04.png	Qué artefactos hay
+horcrux-05.png	Prefetch con nombres sospechosos
+horcrux-06.png	Línea de tiempo de ejecuciones desde rutas de usuario
+horcrux-07.png	Detalle de ejecuciones (runas, tor, wevtutil, inject)
+horcrux-08.png	Amcache: SHA1 y metadatos de los ejecutables de Gregor
+horcrux-09.png	Windows Defender: detección de inject.exe
+horcrux-10.png	inject.exe nunca llegó a ejecutarse
+horcrux-11.png	Logs cortados (limpieza con wevtutil)
+horcrux-12.png	SRUM: exportar la base de datos
+horcrux-13.png	SRUM: qué binarios de usuario usaron la red
+horcrux-14.png	$MFT: llegada por drag & drop y crashes de httpd.exe
+horcrux-15.png	PCA (Compatibility Assistant) en el registro del usuario
+horcrux-16.png	El binario ya no está en la evidencia
+horcrux-17.png	Señuelo restante: uninstall.exe es PE Look
+horcrux-18.png	Pivotar los SHA1 en VirusTotal (API v3)
