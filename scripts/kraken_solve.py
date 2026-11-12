@@ -7,7 +7,7 @@
 2) Reproduce el bucle de descifrado del main (0x42009f) para los 256 posibles valores
    del byte bajo devuelto por la API [0x430000] y muestra los que dan texto legible.
 
-Uso: python3 kraken_solve.py TheKraken.exe kernel32.spec
+Uso: python3 kraken_solve.py TheKraken.exe kernel32_exports.txt   (o un kernel32.spec de Wine)
 """
 import re
 import struct
@@ -28,7 +28,10 @@ def crinkler_hash(name: bytes) -> int:
 names = set()
 for line in spec.splitlines():
     line = line.split("#")[0].strip()
-    m = re.match(r"^(?:@|\d+)\s+\S+\s+(?:-\S+\s+)*([A-Za-z_][A-Za-z0-9_]*)", line)
+    if re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", line):  # lista simple: un nombre por línea
+        names.add(line)
+        continue
+    m = re.match(r"^(?:@|\d+)\s+\S+\s+(?:-\S+\s+)*([A-Za-z_][A-Za-z0-9_]*)", line)  # formato .spec de Wine
     if m:
         names.add(m.group(1))
 table = {crinkler_hash(n.encode()): n for n in names}

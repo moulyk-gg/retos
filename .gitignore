@@ -5,3 +5,8 @@ informe/*.out
 informe/*.toc
 informe/*.listing
 informe/build*.log
+entrega/*.aux
+entrega/*.log
+entrega/*.out
+entrega/*.toc
+entrega/*.listing
